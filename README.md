@@ -1,4 +1,4 @@
-#SPLTTR
+# SPLTTR
 
 A one-place solution to most of your expense problems
 
@@ -10,7 +10,7 @@ Currently in planning phase, this mobile application would let you manage all th
 
 Planned to be developed using Flutter SDK, the application would make use of “sqflite” flutter package to maintain a database and locally store all transactions. This makes the application usable without any network connection and be accessible all time to the user. The Flutter SDK makes the application available for both Android and IOS.
 
-#The Team
+# The Team
 -	Madhur Maurya (@emem365)
 -	Akhilesh Mittal (@akhil2000mittal)
 -	Jayesh Mirchandani (@jayesh-codes)
