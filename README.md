@@ -17,6 +17,7 @@ Currently in the planning phase, this application would let you manage all these
 -	Generate a REPORT, recording all the expenses telling who owes what and HOW!
 -	Keep a record of your personal expenses, something that allows you to keep an eye on your budget easily.
 -	Give your peers a whatsapp reminder or call them directly from within the application to let them know what amount they owe you.
+
 Another prominent feature is the integrated support for paying your dues through online payment services like PayTM.
 
 
