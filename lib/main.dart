@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       home: Material(
         child: Center(
           child: Text(
-            'SPLTTR',
+            'SPLTTR - Splash',
             style: TextStyle(
               fontSize: 80,
               fontWeight: FontWeight.w100,
