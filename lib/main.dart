@@ -1,23 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:shifting_tabbar/shifting_tabbar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:splttr/pages/home.dart';
+import 'package:splttr/pages/friends.dart';
+import 'package:splttr/pages/outings.dart';
+import 'package:splttr/pages/history.dart';
+
 
 void main() => runApp(MyApp());
+
+const primaryColor = Color(0xFFF2F2F2);
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'splttr',
-      home: HomeScreen(),
+      theme: ThemeData(
+        primaryColor: primaryColor,
+        scaffoldBackgroundColor: Color(0xFF250A40),
+      ),
+      home: AppScreen(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
+class AppScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _AppScreenState createState() => _AppScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AppScreenState extends State<AppScreen> {
+  final GlobalKey _scaffold=GlobalKey();
   @override
   void initState(){
     super.initState();
@@ -25,52 +39,40 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 5,
       child: Scaffold(
-        backgroundColor: Colors.yellow,
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              DrawerHeader(
-                child: Text('Drawer Header'),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-              ),
-            ],
-          ),
-        ),
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text('SPLTTR'),
-          actions: <Widget>[
-            IconButton(icon: Icon(Icons.search), onPressed: null),
+        key : _scaffold,
+        appBar: ShiftingTabBar(
+          tabs: <ShiftingTab>[
+            ShiftingTab(
+              icon: Icon(FontAwesomeIcons.home),
+              text: "Home",
+            ),
+            ShiftingTab(
+              icon: Icon(FontAwesomeIcons.userFriends),
+              text: "Friends",
+            ),
+            ShiftingTab(
+              icon: Icon(FontAwesomeIcons.running),
+              text: "Outings",
+            ),
+            ShiftingTab(
+              icon: Icon(FontAwesomeIcons.history),
+              text: "History",
+            ),
+            ShiftingTab(
+              icon: Icon(FontAwesomeIcons.bars),
+              text: "Menu",
+            ),
           ],
         ),
         body: TabBarView(
           children: <Widget>[
-            Center(child: Text('Tab1')),
-            Center(child: Text('Tab2')),
-            Center(child: Text('Tab3')),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: null,
-          label: Text('Add'),
-          icon: Icon(Icons.add),
-        ),
-        bottomNavigationBar: TabBar(
-          labelColor: Colors.red,
-          tabs: <Widget>[
-            Tab(
-              icon: Icon(Icons.search),
-            ),
-            Tab(
-              icon: Icon(Icons.search),
-            ),
-            Tab(
-              icon: Icon(Icons.search),
-            ),
+            Home(),
+            Friends(),
+            Outings(),
+            History(),
+            Material(color: Theme.of(context).primaryColor, child: Center(child: Text('Menu'))),  
           ],
         ),
       ),
