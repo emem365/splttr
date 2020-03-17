@@ -6,7 +6,10 @@ class Friends extends StatefulWidget {
   _FriendsState createState() => _FriendsState();
 }
 
-class _FriendsState extends State<Friends> {
+class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true;
+  
   final _placeholderWidget = Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -31,6 +34,7 @@ class _FriendsState extends State<Friends> {
   );
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(child: _placeholderWidget);
   }
 }

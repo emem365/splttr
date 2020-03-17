@@ -6,7 +6,10 @@ class History extends StatefulWidget {
   _HistoryState createState() => _HistoryState();
 }
 
-class _HistoryState extends State<History> {
+class _HistoryState extends State<History> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true;
+  
   final _placeholderWidget = Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -31,6 +34,7 @@ class _HistoryState extends State<History> {
   );
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(child: _placeholderWidget);
   }
 }

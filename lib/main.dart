@@ -6,10 +6,10 @@ import 'package:splttr/pages/friends.dart';
 import 'package:splttr/pages/outings.dart';
 import 'package:splttr/pages/history.dart';
 
-
 void main() => runApp(MyApp());
 
 const primaryColor = Color(0xFFF2F2F2);
+const accentColor = Color(0xFFBF395D);
 
 class MyApp extends StatelessWidget {
   @override
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: Color(0xFF250A40),
+        accentColor: accentColor,
       ),
       home: AppScreen(),
     );
@@ -31,17 +32,16 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
-  final GlobalKey _scaffold=GlobalKey();
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        key : _scaffold,
         appBar: ShiftingTabBar(
           tabs: <ShiftingTab>[
             ShiftingTab(
@@ -72,9 +72,147 @@ class _AppScreenState extends State<AppScreen> {
             Friends(),
             Outings(),
             History(),
-            Material(color: Theme.of(context).primaryColor, child: Center(child: Text('Menu'))),  
+            Menu(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Menu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Theme.of(context).primaryColor,
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 16.0),
+          ),
+          ListTile(
+            onTap: () {
+              print('heh');
+            },
+            title: Row(
+              children: <Widget>[
+                CircleAvatar(
+                  minRadius: MediaQuery.of(context).size.width / 6,
+                  child: Icon(
+                    Icons.person,
+                    size: MediaQuery.of(context).size.width / 6,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        'YOUR NAME',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                      Text(
+                        '@username',
+                        style: Theme.of(context).textTheme.subtitle,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      leading:
+                          Icon(FontAwesomeIcons.search, color: Colors.black, size: 24.0),
+                      title: Text(
+                        'SEARCH',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      leading:
+                          Icon(FontAwesomeIcons.userFriends, color: Colors.black, size: 24.0),
+                      title: Text(
+                        'FRIENDS LIST',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      leading:
+                          Icon(FontAwesomeIcons.rupeeSign, color: Colors.black, size: 24.0),
+                      title: Text(
+                        'YOUR EXPENDITURE',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      leading:
+                          Icon(FontAwesomeIcons.userAlt, color: Colors.black, size: 24.0),
+                      title: Text(
+                        'YOUR PROFILE',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      leading:
+                          Icon(Icons.settings, color: Colors.black, size: 24.0),
+                      title: Text(
+                        'SETTINGS',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                            ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: ListTile(
+                      leading:
+                          Icon(FontAwesomeIcons.signOutAlt, color: Colors.black, size: 24.0),
+                      title: Text(
+                        'LOGOUT',
+                        style: Theme.of(context).textTheme.headline.copyWith(
+                              letterSpacing: 2,
+                            ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

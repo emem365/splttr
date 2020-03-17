@@ -6,7 +6,10 @@ class Outings extends StatefulWidget {
   _OutingsState createState() => _OutingsState();
 }
 
-class _OutingsState extends State<Outings> {
+class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin{
+  @override
+  bool get wantKeepAlive => true;
+  
   final _placeholderWidget = Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
@@ -31,6 +34,7 @@ class _OutingsState extends State<Outings> {
   );
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(child: _placeholderWidget);
   }
 }
