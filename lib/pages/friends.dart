@@ -26,7 +26,6 @@ class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin{
         style: TextStyle(
           color: Colors.white,
           fontSize: 36.0,
-          letterSpacing: 2,
           fontWeight: FontWeight.bold,
         ),
       ),

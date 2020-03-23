@@ -24,7 +24,7 @@ class _HistoryState extends State<History> with AutomaticKeepAliveClientMixin{
       Text(
         'History',
         style: TextStyle(
-          color: Colors.white,
+          // color: Colors.white,
           fontSize: 48.0,
           letterSpacing: 2,
           fontWeight: FontWeight.bold,

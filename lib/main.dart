@@ -8,8 +8,10 @@ import 'package:splttr/pages/history.dart';
 
 void main() => runApp(MyApp());
 
-const primaryColor = Color(0xFFF2F2F2);
+const primaryColor = Colors.white;
 const accentColor = Color(0xFFBF395D);
+const canvasColor = Color(0xFF2C2559);
+const dividerColor = Colors.white54;
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,31 +20,34 @@ class MyApp extends StatelessWidget {
       title: 'splttr',
       theme: ThemeData(
         primaryColor: primaryColor,
-        scaffoldBackgroundColor: Color(0xFF250A40),
+        scaffoldBackgroundColor: Color(0xFF393073), // Color(0xFF393073)
         accentColor: accentColor,
+        canvasColor: canvasColor,
+        dividerColor: dividerColor,
+        textTheme: Theme.of(context).textTheme.apply(
+              fontFamily: 'Montserrat',
+              bodyColor: Colors.white,
+              displayColor: Colors.white70,
+            ),
       ),
       home: AppScreen(),
     );
   }
 }
 
-class AppScreen extends StatefulWidget {
-  @override
-  _AppScreenState createState() => _AppScreenState();
-}
-
-class _AppScreenState extends State<AppScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class AppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
         appBar: ShiftingTabBar(
+          labelStyle: Theme.of(context).textTheme.headline.copyWith(
+                fontSize: 14,
+                color: Colors.black,
+                letterSpacing: 1,
+                fontWeight: FontWeight.bold,
+              ),
           tabs: <ShiftingTab>[
             ShiftingTab(
               icon: Icon(FontAwesomeIcons.home),
@@ -83,6 +88,10 @@ class _AppScreenState extends State<AppScreen> {
 class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _textTheme = Theme.of(context).textTheme.headline.copyWith(
+          letterSpacing: 2,
+          color: Colors.black,
+        );
     return Material(
       color: Theme.of(context).primaryColor,
       child: Column(
@@ -92,7 +101,7 @@ class Menu extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              print('heh');
+              print('Link to your profile');
             },
             title: Row(
               children: <Widget>[
@@ -110,14 +119,15 @@ class Menu extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         'YOUR NAME',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: _textTheme.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         '@username',
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle.apply(
+                              color: Colors.black,
+                            ),
                       ),
                     ],
                   ),
@@ -133,52 +143,44 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading:
-                          Icon(FontAwesomeIcons.search, color: Colors.black, size: 24.0),
+                      leading: Icon(FontAwesomeIcons.search,
+                          color: Colors.black, size: 24.0),
                       title: Text(
                         'SEARCH',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                            ),
+                        style: _textTheme,
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading:
-                          Icon(FontAwesomeIcons.userFriends, color: Colors.black, size: 24.0),
+                      leading: Icon(FontAwesomeIcons.userFriends,
+                          color: Colors.black, size: 24.0),
                       title: Text(
                         'FRIENDS LIST',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                            ),
+                        style: _textTheme,
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading:
-                          Icon(FontAwesomeIcons.rupeeSign, color: Colors.black, size: 24.0),
+                      leading: Icon(FontAwesomeIcons.rupeeSign,
+                          color: Colors.black, size: 24.0),
                       title: Text(
                         'YOUR EXPENDITURE',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                            ),
+                        style: _textTheme,
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading:
-                          Icon(FontAwesomeIcons.userAlt, color: Colors.black, size: 24.0),
+                      leading: Icon(FontAwesomeIcons.userAlt,
+                          color: Colors.black, size: 24.0),
                       title: Text(
                         'YOUR PROFILE',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                            ),
+                        style: _textTheme,
                       ),
                     ),
                   ),
@@ -189,22 +191,18 @@ class Menu extends StatelessWidget {
                           Icon(Icons.settings, color: Colors.black, size: 24.0),
                       title: Text(
                         'SETTINGS',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                            ),
+                        style: _textTheme,
                       ),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading:
-                          Icon(FontAwesomeIcons.signOutAlt, color: Colors.black, size: 24.0),
+                      leading: Icon(FontAwesomeIcons.signOutAlt,
+                          color: Colors.black, size: 24.0),
                       title: Text(
                         'LOGOUT',
-                        style: Theme.of(context).textTheme.headline.copyWith(
-                              letterSpacing: 2,
-                            ),
+                        style: _textTheme,
                       ),
                     ),
                   ),
