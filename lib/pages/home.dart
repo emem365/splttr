@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
+import 'package:splttr/res/currency.dart';
+import 'package:splttr/res/chart.dart';
+import 'package:splttr/res/dummy_data.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,55 +11,42 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
-  final _usersOweYouList = [
-    {
-      'username': 'user1',
-      'last_trans': '22-03-2020',
-      'amount': 210,
-    },
-    {
-      'username': 'user2',
-      'last_trans': '21-03-2020',
-      'amount': 290,
-    },
-    {
-      'username': 'user3',
-      'last_trans': '20-03-2020',
-      'amount': 190,
-    },
-    {
-      'username': 'user4',
-      'last_trans': '10-03-2020',
-      'amount': 28,
-    },
-    {
-      'username': 'user5',
-      'last_trans': '02-03-2020',
-      'amount': 873,
-    },
-  ];
-  final _youOweUsersList = [
-    {
-      'username': 'user6',
-      'last_trans': '22-03-2020',
-      'amount': -210,
-    },
-    {
-      'username': 'user7',
-      'last_trans': '21-03-2020',
-      'amount': -290,
-    },
-    {
-      'username': 'user8',
-      'last_trans': '20-03-2020',
-      'amount': -190,
-    },
-    {
-      'username': 'user9',
-      'last_trans': '10-03-2020',
-      'amount': -28,
-    },
-  ];
+  final _usersOweYouList = DummyData.usersOweYouList;
+  final _youOweUsersList = DummyData.youOweUsersList;
+  List<OwesDuesChartData> _chartData;
+  List<charts.Series> _chartSeries;
+  var _total;
+  void _buildChartData() {
+    var _usersOweYouTotal = 0;
+    _usersOweYouList.forEach((user) {
+      _usersOweYouTotal += user['amount'];
+    });
+    var _youOweUsersTotal = 0;
+    _youOweUsersList.forEach((user) {
+      _youOweUsersTotal += user['amount'];
+    });
+    _chartData = [
+      OwesDuesChartData(0, _usersOweYouTotal),
+      OwesDuesChartData(1, _youOweUsersTotal),
+    ];
+    _chartSeries = [
+      charts.Series<OwesDuesChartData, int>(
+        id: 'Dues',
+        domainFn: (OwesDuesChartData chartData, _) => chartData.domain,
+        measureFn: (OwesDuesChartData chartData, _) => chartData.amount,
+        colorFn: (OwesDuesChartData chartData, _) => chartData.color,
+        data: _chartData,
+      ),
+    ];
+    _total = _usersOweYouTotal + _youOweUsersTotal;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _buildChartData();
+  }
+
   @override
   bool get wantKeepAlive => true;
   @override
@@ -65,6 +55,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     return ((_youOweUsersList.length > 0) && (_usersOweYouList.length > 0))
         ? ListView(
             children: <Widget>[
+              Container(
+                // margin: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(16.0),
+                // color: Theme.of(context).canvasColor,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width,
+                  child: Chart(_chartSeries, _total),
+                ),
+              ),
               (_usersOweYouList.length > 0)
                   ? _OwesOrDues(userList: _usersOweYouList, userOwesYou: true)
                   : Container(),
@@ -107,10 +107,6 @@ class _OwesOrDues extends StatelessWidget {
   })  : assert(userList.length > 0),
         super(key: key);
 
-  final _colorGreen = Color(0xFF41D9AE);
-  final _colorRed = Color(0xFFBF395D);
-  final _currencyFormat = NumberFormat.simpleCurrency(name: 'INR');
-
   double _getTotal() {
     double total = 0;
     userList.forEach((user) {
@@ -120,14 +116,14 @@ class _OwesOrDues extends StatelessWidget {
   }
 
   List<Widget> _buildList() {
-    var _color = userOwesYou ? _colorGreen : _colorRed;
+    var _color = userOwesYou ? Currency.profitColor : Currency.lossColor;
     List<Widget> lis = [
       ListTile(
         title: Text(
           userOwesYou ? 'You are due:' : 'You Owe :',
         ),
         trailing: Text(
-          '${userOwesYou ? '+' : ''}${_currencyFormat.format(_getTotal())}',
+          '${userOwesYou ? '+' : ''}${Currency.currencyFormat.format(_getTotal())}',
           style: TextStyle(
             fontSize: 24.0,
             color: _color,
@@ -152,7 +148,7 @@ class _OwesOrDues extends StatelessWidget {
           'Last expense from ${user['last_trans']}',
         ),
         trailing: Text(
-          '${userOwesYou ? '+' : ''}${_currencyFormat.format(user['amount'])}',
+          '${userOwesYou ? '+' : ''}${Currency.currencyFormat.format(user['amount'])}',
           style: TextStyle(
             color: _color,
           ),
@@ -165,16 +161,17 @@ class _OwesOrDues extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       margin: EdgeInsets.all(8.0),
-      padding: EdgeInsets.all(16.0),
+      // padding: EdgeInsets.all(16.0),
       color: Theme.of(context).canvasColor,
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: _buildList()),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: _buildList()),
+      ),
     );
   }
 }
-
-// color: Color(0xFFBF395D),

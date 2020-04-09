@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   shifting_tabbar: ^0.3.1
   font_awesome_flutter: ^8.7.0
+  charts_flutter: ^0.9.0
+
 
 dev_dependencies:
   intl: any
@@ -82,7 +84,27 @@ flutter:
         - asset: fonts/montserrat/Montserrat-SemiBoldItalic.ttf
         - asset: fonts/montserrat/Montserrat-Thin.ttf
         - asset: fonts/montserrat/Montserrat-ThinItalic.ttf
-        
+
+    - family: Merriweather
+      fonts:
+        - asset: fonts/merriweather/Merriweather-Black.ttf
+          weight: 900
+        - asset: fonts/merriweather/Merriweather-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: fonts/merriweather/Merriweather-Bold.ttf
+          weight: 700
+        - asset: fonts/merriweather/Merriweather-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: fonts/merriweather/Merriweather-Italic.ttf
+          style: italic
+        - asset: fonts/merriweather/Merriweather-Light.ttf
+          weight: 300
+        - asset: fonts/merriweather/Merriweather-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: fonts/merriweather/Merriweather-Regular.ttf
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

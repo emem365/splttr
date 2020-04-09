@@ -5,13 +5,8 @@ import 'package:splttr/pages/home.dart';
 import 'package:splttr/pages/friends.dart';
 import 'package:splttr/pages/outings.dart';
 import 'package:splttr/pages/history.dart';
-
+import 'package:splttr/res/colors.dart';
 void main() => runApp(MyApp());
-
-const primaryColor = Colors.white;
-const accentColor = Color(0xFFBF395D);
-const canvasColor = Color(0xFF2C2559);
-const dividerColor = Colors.white54;
 
 class MyApp extends StatelessWidget {
   @override
@@ -19,16 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'splttr',
       theme: ThemeData(
-        primaryColor: primaryColor,
-        scaffoldBackgroundColor: Color(0xFF393073), // Color(0xFF393073)
-        accentColor: accentColor,
-        canvasColor: canvasColor,
-        dividerColor: dividerColor,
-        textTheme: Theme.of(context).textTheme.apply(
-              fontFamily: 'Montserrat',
-              bodyColor: Colors.white,
-              displayColor: Colors.white70,
-            ),
+        primaryColor: PurpleTheme.darkPurple,
+        scaffoldBackgroundColor: Colors.white, // Color(0xFF393073)
+        accentColor: PurpleTheme.pinkishPurple,
+        canvasColor: PurpleTheme.blue,
+        // textTheme: Theme.of(context).textTheme.apply(
+        //       bodyColor: Colors.white,
+        //       displayColor: Colors.white70,
+        //     ),
       ),
       home: AppScreen(),
     );
@@ -44,29 +37,44 @@ class AppScreen extends StatelessWidget {
         appBar: ShiftingTabBar(
           labelStyle: Theme.of(context).textTheme.headline.copyWith(
                 fontSize: 14,
-                color: Colors.black,
-                letterSpacing: 1,
-                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 2,
+                fontWeight: FontWeight.w600,
               ),
           tabs: <ShiftingTab>[
             ShiftingTab(
-              icon: Icon(FontAwesomeIcons.home),
+              icon: Icon(
+                FontAwesomeIcons.home,
+                color: Colors.white70,
+              ),
               text: "Home",
             ),
             ShiftingTab(
-              icon: Icon(FontAwesomeIcons.userFriends),
+              icon: Icon(
+                FontAwesomeIcons.userFriends,
+                color: Colors.white70,
+              ),
               text: "Friends",
             ),
             ShiftingTab(
-              icon: Icon(FontAwesomeIcons.running),
+              icon: Icon(
+                FontAwesomeIcons.running,
+                color: Colors.white70,
+              ),
               text: "Outings",
             ),
             ShiftingTab(
-              icon: Icon(FontAwesomeIcons.history),
+              icon: Icon(
+                FontAwesomeIcons.history,
+                color: Colors.white70,
+              ),
               text: "History",
             ),
             ShiftingTab(
-              icon: Icon(FontAwesomeIcons.bars),
+              icon: Icon(
+                FontAwesomeIcons.bars,
+                color: Colors.white70,
+              ),
               text: "Menu",
             ),
           ],
@@ -75,8 +83,8 @@ class AppScreen extends StatelessWidget {
           children: <Widget>[
             Home(),
             Friends(),
-            Outings(),
             History(),
+            Outings(),
             Menu(),
           ],
         ),
