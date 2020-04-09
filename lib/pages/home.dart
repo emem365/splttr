@@ -60,8 +60,8 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                 padding: EdgeInsets.all(16.0),
                 // color: Theme.of(context).canvasColor,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width/1.25,
+                  height: MediaQuery.of(context).size.width/1.25,
                   child: Chart(_chartSeries, _total),
                 ),
               ),

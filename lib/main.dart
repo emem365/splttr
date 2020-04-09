@@ -18,10 +18,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white, // Color(0xFF393073)
         accentColor: PurpleTheme.pinkishPurple,
         canvasColor: PurpleTheme.blue,
-        // textTheme: Theme.of(context).textTheme.apply(
-        //       bodyColor: Colors.white,
-        //       displayColor: Colors.white70,
-        //     ),
+        textTheme: Theme.of(context).textTheme.apply(
+          fontFamily: 'Merriweather'
+        ),
       ),
       home: AppScreen(),
     );
@@ -38,7 +37,7 @@ class AppScreen extends StatelessWidget {
           labelStyle: Theme.of(context).textTheme.headline.copyWith(
                 fontSize: 14,
                 color: Colors.white,
-                letterSpacing: 2,
+                // letterSpacing: 2,
                 fontWeight: FontWeight.w600,
               ),
           tabs: <ShiftingTab>[
@@ -98,7 +97,8 @@ class Menu extends StatelessWidget {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme.headline.copyWith(
           letterSpacing: 2,
-          color: Colors.black,
+          color: Colors.white,
+
         );
     return Material(
       color: Theme.of(context).primaryColor,
@@ -114,6 +114,7 @@ class Menu extends StatelessWidget {
             title: Row(
               children: <Widget>[
                 CircleAvatar(
+                  backgroundColor: PurpleTheme.pinkishPurple,
                   minRadius: MediaQuery.of(context).size.width / 6,
                   child: Icon(
                     Icons.person,
@@ -126,7 +127,7 @@ class Menu extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'YOUR NAME',
+                        'Your Name',
                         style: _textTheme.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -152,9 +153,9 @@ class Menu extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.search,
-                          color: Colors.black, size: 24.0),
+                          color: Colors.white70, size: 24.0),
                       title: Text(
-                        'SEARCH',
+                        'Search',
                         style: _textTheme,
                       ),
                     ),
@@ -163,9 +164,9 @@ class Menu extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.userFriends,
-                          color: Colors.black, size: 24.0),
+                          color: Colors.white70, size: 24.0),
                       title: Text(
-                        'FRIENDS LIST',
+                        'Friends List',
                         style: _textTheme,
                       ),
                     ),
@@ -174,9 +175,9 @@ class Menu extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.rupeeSign,
-                          color: Colors.black, size: 24.0),
+                          color: Colors.white70, size: 24.0),
                       title: Text(
-                        'YOUR EXPENDITURE',
+                        'Your Expenditure',
                         style: _textTheme,
                       ),
                     ),
@@ -185,9 +186,9 @@ class Menu extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.userAlt,
-                          color: Colors.black, size: 24.0),
+                          color: Colors.white70, size: 24.0),
                       title: Text(
-                        'YOUR PROFILE',
+                        'Your Profile',
                         style: _textTheme,
                       ),
                     ),
@@ -196,9 +197,9 @@ class Menu extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading:
-                          Icon(Icons.settings, color: Colors.black, size: 24.0),
+                          Icon(Icons.settings, color: Colors.white70, size: 24.0),
                       title: Text(
-                        'SETTINGS',
+                        'Settings',
                         style: _textTheme,
                       ),
                     ),
@@ -207,9 +208,9 @@ class Menu extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(FontAwesomeIcons.signOutAlt,
-                          color: Colors.black, size: 24.0),
+                          color: Colors.white70, size: 24.0),
                       title: Text(
-                        'LOGOUT',
+                        'Logout',
                         style: _textTheme,
                       ),
                     ),
