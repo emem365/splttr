@@ -26,7 +26,7 @@ dependencies:
   shifting_tabbar: ^0.3.1
   font_awesome_flutter: ^8.7.0
   charts_flutter: ^0.9.0
-
+  flare_flutter: ^2.0.2
 
 dev_dependencies:
   intl: any
@@ -53,8 +53,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+   - animations/loading.flr
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

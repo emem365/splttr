@@ -6,11 +6,13 @@ import 'package:splttr/pages/friends.dart';
 import 'package:splttr/pages/outings.dart';
 import 'package:splttr/pages/history.dart';
 import 'package:splttr/res/colors.dart';
+import 'package:splttr/pages/splash.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'splttr',
       theme: ThemeData(
@@ -18,11 +20,15 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white, // Color(0xFF393073)
         accentColor: PurpleTheme.pinkishPurple,
         canvasColor: PurpleTheme.blue,
-        textTheme: Theme.of(context).textTheme.apply(
-          fontFamily: 'Merriweather'
-        ),
+        textTheme:
+            Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
-      home: AppScreen(),
+      // home: AppScreen(),
+      initialRoute: '/',
+      routes: {
+        '/' : (context) => SplashScreen(),
+        '/home' : (context) => AppScreen(),
+      },
     );
   }
 }
@@ -98,7 +104,6 @@ class Menu extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme.headline.copyWith(
           letterSpacing: 2,
           color: Colors.white,
-
         );
     return Material(
       color: Theme.of(context).primaryColor,
@@ -196,8 +201,8 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading:
-                          Icon(Icons.settings, color: Colors.white70, size: 24.0),
+                      leading: Icon(Icons.settings,
+                          color: Colors.white70, size: 24.0),
                       title: Text(
                         'Settings',
                         style: _textTheme,
