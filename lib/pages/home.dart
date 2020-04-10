@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/chart.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/res/colors.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -60,10 +61,50 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                 padding: EdgeInsets.all(16.0),
                 // color: Theme.of(context).canvasColor,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width/1.25,
-                  height: MediaQuery.of(context).size.width/1.25,
+                  width: MediaQuery.of(context).size.width / 1.25,
+                  height: MediaQuery.of(context).size.width / 1.25,
                   child: Chart(_chartSeries, _total),
                 ),
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: RaisedButton(
+                        padding: EdgeInsets.all(16.0),
+                        shape: StadiumBorder(),
+                        color: PurpleTheme.lightPurple,
+                        onPressed: () {},
+                        child: Text(
+                          'Add Group',
+                          style: TextStyle(
+                              letterSpacing: 1.0,
+                              fontSize: 14.0,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: RaisedButton(
+                        padding: EdgeInsets.all(16.0),
+                        shape: StadiumBorder(),
+                        color: PurpleTheme.lightPurple,
+                        onPressed: () {},
+                        child: Text(
+                          'Add Expense',
+                          style: TextStyle(
+                              letterSpacing: 1.0,
+                              fontSize: 14.0,
+                             ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               (_usersOweYouList.length > 0)
                   ? _OwesOrDues(userList: _usersOweYouList, userOwesYou: true)
