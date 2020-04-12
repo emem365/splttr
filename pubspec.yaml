@@ -38,7 +38,7 @@ dev_dependencies:
 flutter_icons:
   image_path: "images/icons/logo-1.png"
   android: true
-  adaptive_icon_background: "#ffffff"
+  adaptive_icon_background: "#a988f2"
   adaptive_icon_foreground: "images/icons/logo-1-front.png"
 
 # For information on the generic Dart part of this file, see the
@@ -55,6 +55,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    - animations/loading.flr
+   - images/banner.png
+   - images/banner-white.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
