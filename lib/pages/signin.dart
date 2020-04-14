@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:splttr/main.dart';
-import 'package:splttr/res/slide_up_transition.dart';
+import 'package:splttr/res/slide_transition.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _SigninScreenState extends State<SigninScreen> {
       _isProcessing = true;
     });
     _getData().then((_) => Navigator.of(context)
-        .pushReplacement(SlideUpRoute(widget: AppScreen())));
+        .pushReplacement(SlideRoute(widget: AppScreen())));
   }
 
   @override
