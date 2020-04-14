@@ -225,12 +225,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           : FlatButton(
                               padding: EdgeInsets.symmetric(
                                   vertical: 16, horizontal: 75),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  _processUserData(_usernameController.text,
-                                      _passwordController.text);
-                                }
-                              },
+                              onPressed: () {},
                               child: Text(
                                 'Submit',
                                 style: TextStyle(
