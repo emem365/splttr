@@ -110,7 +110,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 32.0),
+                        padding: EdgeInsets.only(top: 24.0, bottom: 8),
                         child: TextFormField(
                           enabled: !_isProcessing,
                           controller: _passwordController,
