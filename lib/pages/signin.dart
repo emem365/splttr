@@ -39,8 +39,8 @@ class _SigninScreenState extends State<SigninScreen> {
     setState(() {
       _isProcessing = true;
     });
-    _getData().then((_) => Navigator.of(context)
-        .pushReplacement(SlideRoute(widget: AppScreen())));
+    _getData().then((_) =>
+        Navigator.of(context).pushReplacement(SlideRoute(widget: AppScreen())));
   }
 
   @override
@@ -145,28 +145,24 @@ class _SigninScreenState extends State<SigninScreen> {
                       Padding(
                         padding: EdgeInsets.all(8),
                         child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          FlatButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            FlatButton(
+                              onPressed: _isProcessing ? null : () {},
+                              textColor: Theme.of(context).primaryColor,
+                              child: Text(
+                                'Forgot Password?',
                               ),
                             ),
-                          ),
-                          FlatButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Create Account?',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                            FlatButton(
+                              onPressed: _isProcessing ? null : () {},
+                              textColor: Theme.of(context).primaryColor,
+                              child: Text(
+                                'Create Account?',
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
                       ),
                       _isProcessing
                           ? JumpingDotsProgressIndicator(
@@ -192,7 +188,6 @@ class _SigninScreenState extends State<SigninScreen> {
                               color: Theme.of(context).primaryColor,
                               shape: StadiumBorder(),
                             ),
-                      
                     ],
                   ),
                 ),
