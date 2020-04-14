@@ -7,6 +7,7 @@ import 'package:splttr/pages/outings.dart';
 import 'package:splttr/pages/history.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/signin.dart';
+import 'package:splttr/pages/signup.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
       // home: AppScreen(),
-      initialRoute: '/',
+      initialRoute: '/signup',
       routes: {
         '/' : (context) => SigninScreen(),
         '/home' : (context) => AppScreen(),
+        '/signup': (context) => SignupScreen(),
       },
     );
   }
