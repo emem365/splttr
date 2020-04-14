@@ -49,12 +49,10 @@ class _SigninScreenState extends State<SigninScreen> {
       body: Material(
         color: Colors.white,
         child: SingleChildScrollView(
-          // controller: _scrollController,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                // alignment: Alignment.topCenter,
                 image: AssetImage('images/banner.png'),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.width,
@@ -100,7 +98,6 @@ class _SigninScreenState extends State<SigninScreen> {
                         decoration: InputDecoration(
                           alignLabelWithHint: true,
                           labelText: 'Username',
-                          // hintText: 'Username',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
                             borderSide: BorderSide(
@@ -136,7 +133,6 @@ class _SigninScreenState extends State<SigninScreen> {
                           decoration: InputDecoration(
                             alignLabelWithHint: true,
                             labelText: 'Password',
-                            // hintText: 'Username',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(40),
                               borderSide: BorderSide(
