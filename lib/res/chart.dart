@@ -16,7 +16,8 @@ class Chart extends StatelessWidget {
             '${total > 0 ? '+' : ''}${Currency.currencyFormat.format(total)}',
             style: Theme.of(context).textTheme.headline.copyWith(
                   fontSize: 36,
-                  color: (total > 0) ? Currency.profitColor : Currency.lossColor,
+                  color:
+                      (total > 0) ? Currency.profitColor : Currency.lossColor,
                 ),
           ),
         ),
@@ -24,15 +25,16 @@ class Chart extends StatelessWidget {
           seriesList,
           animate: true,
           animationDuration: Duration(milliseconds: 500),
-          defaultRenderer: new charts.ArcRendererConfig(arcWidth: 5, strokeWidthPx: 5.0),
+          defaultRenderer:
+              new charts.ArcRendererConfig(arcWidth: 5, strokeWidthPx: 5.0),
         ),
       ],
     );
   }
 }
 
-
-class OwesDuesChartData {   //domain 0 is profit, 1 is loss
+class OwesDuesChartData {
+  //domain 0 is profit, 1 is loss
   final int domain;
   final int amount;
   final charts.Color color;

@@ -6,7 +6,7 @@ import 'package:splttr/pages/friends.dart';
 import 'package:splttr/pages/outings.dart';
 import 'package:splttr/pages/history.dart';
 import 'package:splttr/res/colors.dart';
-import 'package:splttr/pages/splash.dart';
+import 'package:splttr/pages/signin.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       // home: AppScreen(),
       initialRoute: '/',
       routes: {
-        '/' : (context) => SplashScreen(),
+        '/' : (context) => SigninScreen(),
         '/home' : (context) => AppScreen(),
       },
     );
