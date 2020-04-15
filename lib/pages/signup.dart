@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:splttr/main.dart';
 import 'package:splttr/res/slide_transition.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:intl/intl.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -10,13 +11,17 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  Future _getData() async {
+  Future<Null> _getData() async {
     await Future.delayed(Duration(seconds: 3));
   }
 
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _dateController = TextEditingController();
+
   var _isProcessing;
 
   @override
@@ -27,9 +32,21 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _dateController.dispose();
     super.dispose();
+  }
+
+  void _datePicker(BuildContext context) async {
+    final DateTime date =  await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1970),
+      lastDate: DateTime.now(),
+    );
+    print(DateFormat.yMd().format(date));
   }
 
   void _processUserData(String username, String password) {
@@ -77,7 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: TextFormField(
                           enabled: !_isProcessing,
-                          // controller: _firstNameController,
+                          controller: _firstNameController,
                           validator: (value) {
                             final _allowedLetters =
                                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -112,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: TextFormField(
                           enabled: !_isProcessing,
-                          // controller: _lastNameController,
+                          controller: _lastNameController,
                           validator: (value) {
                             final _allowedLetters =
                                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -144,7 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: TextFormField(
                           enabled: !_isProcessing,
-                          // controller: _emailController,
+                          controller: _emailController,
                           validator: (value) {
                             final _allowedLetters =
                                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -185,8 +202,10 @@ class _SignupScreenState extends State<SignupScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: TextFormField(
                           enabled: !_isProcessing,
-                          // onTap: _selectDate(),
-                          // controller: _dateController,
+                          onTap: (){
+                            _datePicker(context);
+                          },
+                          controller: _dateController,
                           validator: (value) {
                             final _allowedLetters = "0123456789-";
                             if (value.length > 10) {
@@ -227,7 +246,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   vertical: 16, horizontal: 75),
                               onPressed: () {},
                               child: Text(
-                                'Submit',
+                                'Next',
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),

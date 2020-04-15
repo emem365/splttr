@@ -155,7 +155,10 @@ class _SigninScreenState extends State<SigninScreen> {
                               ),
                             ),
                             FlatButton(
-                              onPressed: _isProcessing ? null : () {},
+                              onPressed: _isProcessing
+                                  ? null
+                                  : () => Navigator.of(context)
+                                      .pushNamed('/signup'),
                               textColor: Theme.of(context).primaryColor,
                               child: Text(
                                 'Create Account?',

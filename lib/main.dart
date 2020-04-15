@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
       // home: AppScreen(),
-      initialRoute: '/signup',
+      // initialRoute: '/signup',
       routes: {
         '/' : (context) => SigninScreen(),
         '/home' : (context) => AppScreen(),
