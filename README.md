@@ -12,7 +12,7 @@ One of the biggest problems in student lives is managing money and keeping a rec
 
 # The Application
 
-Currently in the planning phase, this application would let you manage all these expenses with just a few taps.
+Currently in the making, this application would let you manage all these expenses with just a few taps.
 -	Add friends individually or form a group you mostly go out with, easily splitting all your bills, trip expenses or any get-togethers, easily managing them or any of your borrowings.
 -	Generate a REPORT, recording all the expenses telling who owes what and HOW!
 -	Keep a record of your personal expenses, something that allows you to keep an eye on your budget easily.
