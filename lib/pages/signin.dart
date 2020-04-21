@@ -111,23 +111,6 @@ class _SigninScreenState extends State<SigninScreen> {
                         child: TextFormField(
                           enabled: !_isProcessing,
                           controller: _passwordController,
-                          validator: (value) {
-                            final _allowedLetters =
-                                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!.-_@#\$%^&*?<>";
-                            if (value.isEmpty) {
-                              return 'Please enter a password';
-                            }
-                            if (value.length > 32) {
-                              return 'Enter a valid password';
-                            }
-                            var lis = value.split('');
-                            for (String char in lis) {
-                              if (!(_allowedLetters.contains(char))) {
-                                return 'Illegal letters present';
-                              }
-                            }
-                            return null;
-                          },
                           cursorColor: Theme.of(context).primaryColor,
                           obscureText: true,
                           decoration: InputDecoration(
