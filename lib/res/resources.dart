@@ -9,6 +9,9 @@ class Tile extends StatelessWidget {
   final String body;
   final String subtitle;
   final int amount;
+  final void Function() onTap;
+  final Color splashColor;
+
 
   const Tile({
     Key key,
@@ -17,11 +20,16 @@ class Tile extends StatelessWidget {
     this.body = '',
     this.subtitle = '',
     this.amount,
+    this.onTap,
+    this.splashColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return InkWell(
+      splashColor: splashColor,
+      onTap: onTap,
+      child: Card(
       color: PurpleTheme.lightPurple,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -88,6 +96,7 @@ class Tile extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 }
