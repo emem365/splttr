@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/chart.dart';
 import 'package:splttr/res/dummy_data.dart';
@@ -79,9 +80,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                         child: Text(
                           'Add Group',
                           style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontSize: 14.0,
-                              ),
+                            letterSpacing: 1.0,
+                            fontSize: 14.0,
+                          ),
                         ),
                       ),
                     ),
@@ -97,9 +98,9 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                         child: Text(
                           'Add Expense',
                           style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontSize: 14.0,
-                             ),
+                            letterSpacing: 1.0,
+                            fontSize: 14.0,
+                          ),
                         ),
                       ),
                     ),
@@ -176,10 +177,12 @@ class _OwesOrDues extends StatelessWidget {
     userList.forEach((user) {
       lis.add(ListTile(
         leading: CircleAvatar(
-          child: Icon(
-            FontAwesomeIcons.user,
-            color: Colors.white,
-          ),
+          child: user['avatar'] == ''
+              ? Icon(
+                  FontAwesomeIcons.user,
+                  color: Colors.white,
+                )
+              : Avatars.getAssetFromName(user['avatar']),
           backgroundColor: _color,
         ),
         title: Text(

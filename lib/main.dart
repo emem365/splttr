@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/pages/home.dart';
 import 'package:splttr/pages/friends.dart';
 import 'package:splttr/pages/outings.dart';
-import 'package:splttr/pages/history.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/signin.dart';
 import 'package:splttr/pages/signup.dart';
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
       // home: AppScreen(),
-      // initialRoute: '/signup',
+      initialRoute: '/home',
       routes: {
         '/' : (context) => SigninScreen(),
         '/home' : (context) => AppScreen(),
@@ -39,7 +38,7 @@ class AppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 4,
       child: Scaffold(
         appBar: ShiftingTabBar(
           labelStyle: Theme.of(context).textTheme.headline.copyWith(
@@ -70,13 +69,13 @@ class AppScreen extends StatelessWidget {
               ),
               text: "Outings",
             ),
-            ShiftingTab(
-              icon: Icon(
-                FontAwesomeIcons.history,
-                color: Colors.white70,
-              ),
-              text: "History",
-            ),
+            // ShiftingTab(
+            //   icon: Icon(
+            //     FontAwesomeIcons.history,
+            //     color: Colors.white70,
+            //   ),
+            //   text: "History",
+            // ),
             ShiftingTab(
               icon: Icon(
                 FontAwesomeIcons.bars,
@@ -90,7 +89,6 @@ class AppScreen extends StatelessWidget {
           children: <Widget>[
             Home(),
             Friends(),
-            History(),
             Outings(),
             Menu(),
           ],
