@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splttr/res/avatars.dart';
-import 'package:splttr/res/colors.dart';
+import 'package:splttr/res/resources.dart';
 
 class Outings extends StatefulWidget {
   @override
@@ -18,19 +17,11 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Card(
-            color: PurpleTheme.lightPurple,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-              child: Row(
-                children: <Widget>[
-                  CircleAvatar(
-                    child: Avatars.getAssetFromName('travel-bag'),
-                    radius: MediaQuery.of(context).size.width/8,
-                  ),
-                ],
-              ),
-            ),
+          child: Tile(
+            avatar: 'travel-bag',
+            title: 'Goa Trip',
+            body: 'with Akhilesh, Dharma and 3 others',
+            subtitle: '14/08/2022',
           ),
         ),
       ],
