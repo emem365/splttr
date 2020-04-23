@@ -35,9 +35,12 @@ class Tile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Row(
             children: <Widget>[
-              CircleAvatar(
-                child: Avatars.getAssetFromName(avatar),
-                radius: MediaQuery.of(context).size.width / 8,
+              Hero(
+                tag: title,
+                child: CircleAvatar(
+                  child: Avatars.getAssetFromName(avatar),
+                  radius: MediaQuery.of(context).size.width / 8,
+                ),
               ),
               SizedBox(
                 width: (amount == null)

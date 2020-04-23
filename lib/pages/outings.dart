@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/resources.dart';
@@ -35,7 +36,7 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return ListView.builder(
-      itemCount: _outingsList.length+1,
+      itemCount: _outingsList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0)
           return Padding(
@@ -56,12 +57,12 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
                 ),
                 Text(
                   'Outings',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline,
+                  style: Theme.of(context).textTheme.headline.copyWith(
+                        fontFamily: 'Montserrat',
+                      ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top:16),
+                  padding: EdgeInsets.only(top: 16),
                 ),
                 Row(
                   children: <Widget>[
@@ -114,11 +115,111 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
               title: _outingsList[index]['outing-name'],
               body: _createBodyForTile(_outingsList[index]['friends']),
               subtitle: _dateformat.format(_outingsList[index]['date']),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => OutingPage(
+                              name: _outingsList[index]['outing-name'],
+                              avatar: _outingsList[index]['avatar'],
+                            )));
+              },
               backgroundColor: PurpleTheme.blue,
               splashColor: Theme.of(context).splashColor),
         );
       },
+    );
+  }
+}
+
+class OutingPage extends StatefulWidget {
+  final String name;
+  final String avatar;
+  OutingPage({this.name, this.avatar});
+  @override
+  _OutingPageState createState() => _OutingPageState();
+}
+
+class _OutingPageState extends State<OutingPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: DefaultTabController(
+        initialIndex: 1,
+        length: 3,
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                ),
+                backgroundColor: Colors.white,
+                pinned: true,
+                // floating: true,
+                expandedHeight: MediaQuery.of(context).size.width / 3 + 200,
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.pin,
+                  background: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Hero(
+                        tag: widget.name,
+                        child: CircleAvatar(
+                          child: Avatars.getAssetFromName(widget.avatar),
+                          radius: MediaQuery.of(context).size.width / 6,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          widget.name,
+                          style: Theme.of(context).textTheme.headline.copyWith(
+                                fontFamily: 'Montserrat',
+                              ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                bottom: TabBar(
+                  labelColor: Colors.black,
+                  tabs: [
+                    Tab(
+                      text: 'Screen 1',
+                    ),
+                    Tab(
+                      text: 'Screen 2',
+                    ),
+                    Tab(
+                      text: 'Screen 3',
+                    ),
+                  ],
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            children: <Widget>[
+              Material(
+                child: Center(child: Text('Screen1')),
+              ),
+              Material(
+                child: Center(child: Text('Screen2')),
+              ),
+              Material(
+                child: Center(child: Text('Screen3')),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
