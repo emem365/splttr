@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class Avatars {
-  final List<String> list = [
+  static final List<String> avatarList = [
     'abacus',
     'ambulance',
     'apple',
@@ -63,6 +65,19 @@ class Avatars {
     'yoga',
   ];
 
-  static String getPathFromName(String name)=> 'images/avatars/$name.png';
-  static Image getAssetFromName(String name) => Image.asset(getPathFromName(name));
+  static String getPathFromName(String name) {
+    if (avatarList.contains(name))
+      return 'images/avatars/$name.png';
+    else
+      return null;
+  }
+
+  static Widget getAssetFromName(String name) {
+    if (getPathFromName(name) != null)
+      return Image.asset(getPathFromName(name));
+    return Icon(
+      FontAwesomeIcons.user,
+      color: Colors.white,
+    );
+  }
 }

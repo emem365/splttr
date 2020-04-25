@@ -49,39 +49,50 @@ class Tile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: (amount == null) ? 16.0 : 8.0, bottom: 4.0),
-                      child: Text(
-                        title,
-                        style: Theme.of(context).textTheme.subhead.copyWith(
-                              fontSize: 16.0,
+                    (title != '')
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                left: (amount == null) ? 16.0 : 8.0,
+                                bottom: 4.0),
+                            child: Text(
+                              title,
+                              style:
+                                  Theme.of(context).textTheme.subhead.copyWith(
+                                        fontSize: 16.0,
+                                      ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: (amount == null) ? 16.0 : 8.0, bottom: 4.0),
-                      child: Text(
-                        body,
-                        style: Theme.of(context).textTheme.body1,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: (amount == null) ? 16.0 : 8.0, bottom: 4.0),
-                      child: Text(
-                        subtitle,
-                        style: Theme.of(context).textTheme.subtitle.copyWith(
-                              color: Colors.black54,
+                          )
+                        : null,
+                    (body != '')
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                left: (amount == null) ? 16.0 : 8.0,
+                                bottom: 4.0),
+                            child: Text(
+                              body,
+                              style: Theme.of(context).textTheme.body1,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                      ),
-                    ),
-                  ],
+                          )
+                        : null,
+                    (subtitle != '')
+                        ? Padding(
+                            padding: EdgeInsets.only(
+                                left: (amount == null) ? 16.0 : 8.0,
+                                bottom: 4.0),
+                            child: Text(
+                              subtitle,
+                              style:
+                                  Theme.of(context).textTheme.subtitle.copyWith(
+                                        color: Colors.black54,
+                                      ),
+                            ),
+                          )
+                        : null,
+                  ].where((test) => test != null).toList(),
                 ),
               ),
               amount != null

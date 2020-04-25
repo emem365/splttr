@@ -7,12 +7,12 @@ import 'package:splttr/pages/outings.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/signin.dart';
 import 'package:splttr/pages/signup.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
       title: 'splttr',
       theme: ThemeData(
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       // home: OutingPage(),
       initialRoute: '/home',
       routes: {
-        '/' : (context) => SigninScreen(),
-        '/home' : (context) => AppScreen(),
+        '/': (context) => SigninScreen(),
+        '/home': (context) => AppScreen(),
         '/signup': (context) => SignupScreen(),
       },
     );
@@ -157,8 +157,11 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(FontAwesomeIcons.search,
-                          color: Colors.white70, size: 24.0),
+                      leading: Icon(
+                        FontAwesomeIcons.search,
+                        color: Colors.white70,
+                        size: 24.0,
+                      ),
                       title: Text(
                         'Search',
                         style: _textTheme,
@@ -168,8 +171,11 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(FontAwesomeIcons.userFriends,
-                          color: Colors.white70, size: 24.0),
+                      leading: Icon(
+                        FontAwesomeIcons.userFriends,
+                        color: Colors.white70,
+                        size: 24.0,
+                      ),
                       title: Text(
                         'Friends List',
                         style: _textTheme,
@@ -179,8 +185,11 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(FontAwesomeIcons.rupeeSign,
-                          color: Colors.white70, size: 24.0),
+                      leading: Icon(
+                        FontAwesomeIcons.rupeeSign,
+                        color: Colors.white70,
+                        size: 24.0,
+                      ),
                       title: Text(
                         'Your Expenditure',
                         style: _textTheme,
@@ -190,8 +199,11 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(FontAwesomeIcons.userAlt,
-                          color: Colors.white70, size: 24.0),
+                      leading: Icon(
+                        FontAwesomeIcons.userAlt,
+                        color: Colors.white70,
+                        size: 24.0,
+                      ),
                       title: Text(
                         'Your Profile',
                         style: _textTheme,
@@ -201,8 +213,11 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(Icons.settings,
-                          color: Colors.white70, size: 24.0),
+                      leading: Icon(
+                        Icons.settings,
+                        color: Colors.white70,
+                        size: 24.0,
+                      ),
                       title: Text(
                         'Settings',
                         style: _textTheme,
@@ -212,8 +227,11 @@ class Menu extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(FontAwesomeIcons.signOutAlt,
-                          color: Colors.white70, size: 24.0),
+                      leading: Icon(
+                        FontAwesomeIcons.signOutAlt,
+                        color: Colors.white70,
+                        size: 24.0,
+                      ),
                       title: Text(
                         'Logout',
                         style: _textTheme,

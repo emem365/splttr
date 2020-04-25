@@ -78,7 +78,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
                         color: PurpleTheme.lightPurple,
                         onPressed: () {},
                         child: Text(
-                          'Add Group',
+                          'Add Friend',
                           style: TextStyle(
                             letterSpacing: 1.0,
                             fontSize: 14.0,
@@ -177,12 +177,7 @@ class _OwesOrDues extends StatelessWidget {
     userList.forEach((user) {
       lis.add(ListTile(
         leading: CircleAvatar(
-          child: user['avatar'] == ''
-              ? Icon(
-                  FontAwesomeIcons.user,
-                  color: Colors.white,
-                )
-              : Avatars.getAssetFromName(user['avatar']),
+          child: Avatars.getAssetFromName(user['avatar']),
           backgroundColor: _color,
         ),
         title: Text(
