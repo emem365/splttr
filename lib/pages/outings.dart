@@ -205,25 +205,27 @@ class _OutingPageState extends State<OutingPage> {
                       ],
                     ),
                   ),
-                  bottom: TabBar(
-                    indicatorColor: Theme.of(context).primaryColor,
-                    unselectedLabelColor: Colors.black54,
-                    labelColor: Colors.black,
-                    labelStyle: Theme.of(context).textTheme.headline.copyWith(
-                          fontSize: 14,
-                          backgroundColor: Colors.white54,
+                  bottom: TabBarWithBackground(
+                    tabBar: TabBar(
+                      indicatorColor: Theme.of(context).primaryColor,
+                      unselectedLabelColor: Colors.black54,
+                      labelColor: Colors.black,
+                      labelStyle: Theme.of(context).textTheme.headline.copyWith(
+                            fontSize: 14,
+                          ),
+                      tabs: [
+                        Tab(
+                          text: 'Expenses',
                         ),
-                    tabs: [
-                      Tab(
-                        text: ' Expenses ',
-                      ),
-                      Tab(
-                        text: ' Settlements ',
-                      ),
-                      Tab(
-                        text: ' Participants ',
-                      ),
-                    ],
+                        Tab(
+                          text: 'Settlements',
+                        ),
+                        Tab(
+                          text: 'Participants',
+                        ),
+                      ],
+                    ),
+                    backgroundColor: Colors.white54,
                   ),
                 ),
               ];
@@ -270,6 +272,7 @@ class _OutingExpensesTabState extends State<OutingExpensesTab> {
     );
   }
 }
+
 class OutingSettlementsTab extends StatefulWidget {
   @override
   _OutingSettlementsTabState createState() => _OutingSettlementsTabState();
