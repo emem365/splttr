@@ -4,7 +4,6 @@ import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
-import 'package:splttr/res/resources.dart';
 
 class OutingSettlementsTab extends StatefulWidget {
   @override

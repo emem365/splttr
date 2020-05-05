@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/colors.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TabBarWithBackground extends StatelessWidget
     implements PreferredSizeWidget {
