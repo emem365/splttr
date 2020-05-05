@@ -3,7 +3,7 @@ import 'package:shifting_tabbar/shifting_tabbar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/pages/home.dart';
 import 'package:splttr/pages/friends.dart';
-import 'package:splttr/pages/outings.dart';
+import 'package:splttr/pages/outings/outings.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/signin.dart';
 import 'package:splttr/pages/signup.dart';
