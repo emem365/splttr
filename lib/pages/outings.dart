@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/currency.dart';
@@ -155,6 +156,29 @@ class _OutingPageState extends State<OutingPage> {
             headerSliverBuilder: (context, innBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
+                  actions: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.share,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        FontAwesomeIcons.edit,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        FontAwesomeIcons.solidTrashAlt,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
                   leading: IconButton(
                     icon: Icon(
                       Icons.arrow_back_ios,
@@ -265,10 +289,58 @@ class OutingExpensesTab extends StatefulWidget {
 }
 
 class _OutingExpensesTabState extends State<OutingExpensesTab> {
+  List<Map> _outingExpensesList = DummyData.outingExpensesList;
+  String _createBodyForTile(List<String> friendsList) {
+    switch (friendsList.length) {
+      case 0:
+        return '';
+      case 1:
+        return '${friendsList[0]}';
+      case 2:
+        return '${friendsList[0]} and ${friendsList[1]}';
+      case 3:
+        return '${friendsList[0]}, ${friendsList[1]} and ${friendsList[2]}';
+      default:
+        return '${friendsList[0]}, ${friendsList[1]} and ${friendsList.length - 2} others';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        itemCount: _outingExpensesList.length,
+        itemBuilder: (_, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 4.0),
+            child: SmallAvatarTile(
+              avatar: _outingExpensesList[index]['spent-by-avatar'],
+              title: _outingExpensesList[index]['spent-on'],
+              subtitle:
+                  'Amount: ${Currency.currencyFormat.format(_outingExpensesList[index]['amount'])}',
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.edit,
+                    size: 20,
+                  ),
+                  onPressed: () => print('edit'),
+                ),
+                IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.trashAlt,
+                    size: 20,
+                  ),
+                  onPressed: () => print('trash'),
+                ),
+              ],
+              onTap: () => print('tile'),
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -279,10 +351,65 @@ class OutingSettlementsTab extends StatefulWidget {
 }
 
 class _OutingSettlementsTabState extends State<OutingSettlementsTab> {
+  List<Map> _outingSettlementsList = DummyData.outingSettlementsList;
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        itemCount: _outingSettlementsList.length + 1,
+        itemBuilder: (_, index) {
+          if (index == 0) {
+            return FlatButton(
+              onPressed: () {},
+              child: Text(
+                'Add your share to your expenses? Click here!',
+                style: TextStyle(
+                  color: PurpleTheme.darkPurple,
+                ),
+              ),
+            );
+          }
+          index--;
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Card(
+              color: PurpleTheme.blue,
+              child: Container(
+                height: 125,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 30,
+                          child: Avatars.getAssetFromName(
+                              _outingSettlementsList[index]['from-avatar']),
+                        ),
+                        Icon(FontAwesomeIcons.arrowRight),
+                        CircleAvatar(
+                          radius: 30,
+                          child: Avatars.getAssetFromName(
+                              _outingSettlementsList[index]['to-avatar']),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      '${_outingSettlementsList[index]['from']} gives ${Currency.currencyFormat.format(_outingSettlementsList[index]['amount'])} to ${_outingSettlementsList[index]['to']}',
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
@@ -294,43 +421,31 @@ class OutingParticipantsTab extends StatefulWidget {
 
 class _OutingParticipantsTabState extends State<OutingParticipantsTab> {
   List<Map> _participantsList = DummyData.outingParticipantList;
-
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Card(
-              color: PurpleTheme.blue,
-              child: Column(
-                children: List.generate(
-                  _participantsList.length * 2,
-                  (int index) {
-                    if (index % 2 == 0)
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                              child: Avatars.getAssetFromName(
-                                  _participantsList[index ~/ 2]['avatar'])),
-                          title:
-                              Text(_participantsList[index ~/ 2]['username']),
-                          subtitle: Text(
-                              'spent: ${Currency.currencyFormat.format(_participantsList[index ~/ 2]['spent'])}'),
-                          onTap: () {},
-                        ),
-                      );
-                    else
-                      return Divider();
-                  },
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        itemCount: _participantsList.length,
+        itemBuilder: (_, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 4.0),
+            child: SmallAvatarTile(
+              avatar: _participantsList[index]['avatar'],
+              title: _participantsList[index]['username'],
+              subtitle:
+                  'Spent: ${Currency.currencyFormat.format(_participantsList[index]['spent'])}',
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(FontAwesomeIcons.trashAlt),
+                  onPressed: () => print('trash'),
                 ),
-              ),
+              ],
+              onTap: () => print('tile'),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

@@ -119,6 +119,115 @@ class DummyData {
       'avatar': 'passport',
     },
   ];
+  static const List<Map> outingExpensesList=[
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 40,
+      'split-among': ['blah', 'all'],
+      'spent-on' : 'Chips',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 500,
+      'split-among': ['blah', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'badi',
+      'spent-by-avatar' : 'yoga',
+    },
+    {
+      'amount': 410,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+    {
+      'amount': 450,
+      'split-among': ['blah', 'badi', 'bu', 'blah', 'all'],
+      'spent-on' : 'Food',
+      'spent-by' : 'blah',
+      'spent-by-avatar' : 'mario',
+    },
+  ];
+  static const List<Map> outingSettlementsList=[
+    {
+      'amount' : 450,
+      'from' : 'username1',
+      'from-avatar' : 'yoga',
+      'to': 'username2',
+      'to-avatar' : 'woman',
+    },
+    {
+      'amount' : 160,
+      'from' : 'username2',
+      'from-avatar' : 'einstein',
+      'to': 'username3',
+      'to-avatar' : 'man',
+    },
+    {
+      'amount' : 40,
+      'from' : 'username4',
+      'from-avatar' : 'mario',
+      'to': 'username5',
+      'to-avatar' : 'ghost',
+    },
+    {
+      'amount' : 450,
+      'from' : 'username1',
+      'from-avatar' : 'yoga',
+      'to': 'username2',
+      'to-avatar' : 'woman',
+    },
+  ];
   static const List<Map> outingParticipantList = [
     {
       'username': 'user1',
