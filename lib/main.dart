@@ -3,10 +3,11 @@ import 'package:shifting_tabbar/shifting_tabbar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/pages/home.dart';
 import 'package:splttr/pages/friends.dart';
-import 'package:splttr/pages/outings/outings.dart';
+import 'package:splttr/pages/splits/splits.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/signin.dart';
 import 'package:splttr/pages/signup.dart';
+import 'package:splttr/pages/expenses.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,7 +39,7 @@ class AppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: ShiftingTabBar(
           labelStyle: Theme.of(context).textTheme.headline.copyWith(
@@ -57,25 +58,25 @@ class AppScreen extends StatelessWidget {
             ),
             ShiftingTab(
               icon: Icon(
+                FontAwesomeIcons.running,
+                color: Colors.white70,
+              ),
+              text: "Splits",
+            ),
+            ShiftingTab(
+              icon: Icon(
+                FontAwesomeIcons.history,
+                color: Colors.white70,
+              ),
+              text: "Expenses",
+            ),
+            ShiftingTab(
+              icon: Icon(
                 FontAwesomeIcons.userFriends,
                 color: Colors.white70,
               ),
               text: "Friends",
             ),
-            ShiftingTab(
-              icon: Icon(
-                FontAwesomeIcons.running,
-                color: Colors.white70,
-              ),
-              text: "Outings",
-            ),
-            // ShiftingTab(
-            //   icon: Icon(
-            //     FontAwesomeIcons.history,
-            //     color: Colors.white70,
-            //   ),
-            //   text: "History",
-            // ),
             ShiftingTab(
               icon: Icon(
                 FontAwesomeIcons.bars,
@@ -88,8 +89,9 @@ class AppScreen extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             Home(),
+            Splits(),
+            Expenses(),
             Friends(),
-            Outings(),
             Menu(),
           ],
         ),

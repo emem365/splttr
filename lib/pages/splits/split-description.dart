@@ -3,19 +3,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:splttr/res/colors.dart';
-import 'package:splttr/pages/outings/outing_expenses_tab.dart';
-import 'package:splttr/pages/outings/outing_settlements_tab.dart';
-import 'package:splttr/pages/outings/outing_participants_tab.dart';
+import 'package:splttr/pages/splits/split_expenses_tab.dart';
+import 'package:splttr/pages/splits/split_settlements_tab.dart';
+import 'package:splttr/pages/splits/split_participants_tab.dart';
 
-class OutingPage extends StatefulWidget {
+class SplitPage extends StatefulWidget {
+  final String tag;
   final String name;
   final String avatar;
-  OutingPage({this.name, this.avatar});
+  SplitPage({this.tag, this.name, this.avatar});
   @override
-  _OutingPageState createState() => _OutingPageState();
+  _SplitPageState createState() => _SplitPageState();
 }
 
-class _OutingPageState extends State<OutingPage> {
+class _SplitPageState extends State<SplitPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -75,7 +76,7 @@ class _OutingPageState extends State<OutingPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Hero(
-                              tag: widget.name,
+                              tag: widget.tag,
                               child: CircleAvatar(
                                 child: Avatars.getAssetFromName(widget.avatar),
                                 radius: MediaQuery.of(context).size.width / 6,
@@ -127,9 +128,9 @@ class _OutingPageState extends State<OutingPage> {
             },
             body: TabBarView(
               children: <Widget>[
-                OutingExpensesTab(),
-                OutingSettlementsTab(),
-                OutingParticipantsTab(),
+                SplitExpensesTab(),
+                SplitSettlementsTab(),
+                SplitParticipantsTab(),
               ],
             ),
           ),

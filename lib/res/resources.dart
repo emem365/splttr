@@ -63,6 +63,7 @@ class SmallAvatarTile extends StatelessWidget {
 }
 
 class Tile extends StatelessWidget {
+  final String tag;
   final String avatar;
   final String title;
   final String body;
@@ -74,7 +75,8 @@ class Tile extends StatelessWidget {
 
   const Tile({
     Key key,
-    this.avatar = '',
+    this.tag,
+    this.avatar,
     this.title = '',
     this.body = '',
     this.subtitle = '',
@@ -82,7 +84,8 @@ class Tile extends StatelessWidget {
     this.amount,
     this.onTap,
     this.splashColor,
-  }) : super(key: key);
+  })  : assert((avatar == null) ? (tag == null) : (tag != null)),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -95,31 +98,38 @@ class Tile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: Row(
             children: <Widget>[
-              Hero(
-                tag: title,
-                child: CircleAvatar(
-                  child: Avatars.getAssetFromName(avatar),
-                  radius: MediaQuery.of(context).size.width / 8,
-                ),
-              ),
+              (avatar != null)
+                  ? Hero(
+                      tag: tag,
+                      child: CircleAvatar(
+                        child: Avatars.getAssetFromName(avatar),
+                        radius: MediaQuery.of(context).size.width / 8,
+                      ),
+                    )
+                  : null,
               SizedBox(
                 width: (amount == null)
                     ? MediaQuery.of(context).size.width / 2
-                    : MediaQuery.of(context).size.width / 2.5,
+                    : (avatar == null)
+                        ? MediaQuery.of(context).size.width / 1.5
+                        : MediaQuery.of(context).size.width / 2.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     (title != '')
                         ? Padding(
                             padding: EdgeInsets.only(
-                                left: (amount == null) ? 16.0 : 8.0,
-                                bottom: 4.0),
+                              left: 16.0,
+                              bottom: 4.0,
+                            ),
                             child: Text(
                               title,
-                              style:
-                                  Theme.of(context).textTheme.subhead.copyWith(
-                                        fontSize: 16.0,
-                                      ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subhead
+                                  .copyWith(
+                                    fontSize: (avatar == null) ? 18.0 : 16.0,
+                                  ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -128,8 +138,9 @@ class Tile extends StatelessWidget {
                     (body != '')
                         ? Padding(
                             padding: EdgeInsets.only(
-                                left: (amount == null) ? 16.0 : 8.0,
-                                bottom: 4.0),
+                              left: 16.0,
+                              bottom: 4.0,
+                            ),
                             child: Text(
                               body,
                               style: Theme.of(context).textTheme.body1,
@@ -141,8 +152,9 @@ class Tile extends StatelessWidget {
                     (subtitle != '')
                         ? Padding(
                             padding: EdgeInsets.only(
-                                left: (amount == null) ? 16.0 : 8.0,
-                                bottom: 4.0),
+                              left: 16.0,
+                              bottom: 4.0,
+                            ),
                             child: Text(
                               subtitle,
                               style:
@@ -158,7 +170,7 @@ class Tile extends StatelessWidget {
               amount != null
                   ? Expanded(
                       child: Text(
-                        '${amount > 0 ? '+' : ''}${Currency.currencyFormat.format(amount).replaceAll(".00", "")}',
+                        '${Currency.currencyFormat.format(amount).replaceAll(".00", "")}',
                         style: TextStyle(
                           color: amount > 0
                               ? Currency.profitColor
@@ -167,10 +179,11 @@ class Tile extends StatelessWidget {
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.end,
                       ),
                     )
-                  : Container(),
-            ],
+                  : null,
+            ].where((test) => test != null).toList(),
           ),
         ),
       ),

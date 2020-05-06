@@ -3,40 +3,24 @@ import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:intl/intl.dart';
-import 'package:splttr/pages/outings/outing-description.dart';
 
-class Outings extends StatefulWidget {
+class Expenses extends StatefulWidget {
   @override
-  _OutingsState createState() => _OutingsState();
+  _ExpensesState createState() => _ExpensesState();
 }
 
-class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
+class _ExpensesState extends State<Expenses> with AutomaticKeepAliveClientMixin {
   final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
-  List _outingsList = DummyData.outingsList;
+  List _expensesList = DummyData.expensesList;
 
   @override
   bool get wantKeepAlive => true;
-
-  String _createBodyForTile(List<String> friendsList) {
-    switch (friendsList.length) {
-      case 0:
-        return '';
-      case 1:
-        return 'with ${friendsList[0]}';
-      case 2:
-        return 'with ${friendsList[0]} and ${friendsList[1]}';
-      case 3:
-        return 'with ${friendsList[0]}, ${friendsList[1]} and ${friendsList[2]}';
-      default:
-        return 'with ${friendsList[0]}, ${friendsList[1]} and ${friendsList.length - 2} others';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ListView.builder(
-      itemCount: _outingsList.length + 1,
+      itemCount: _expensesList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0)
           return Padding(
@@ -50,13 +34,13 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
                     width: MediaQuery.of(context).size.width / 3,
                     height: MediaQuery.of(context).size.width / 3,
                     child: Image.asset(
-                      'images/outings.png',
+                      'images/split.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Text(
-                  'Outings',
+                  'Expenses',
                   style: Theme.of(context).textTheme.headline.copyWith(
                         fontFamily: 'Montserrat',
                       ),
@@ -75,7 +59,7 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
                           color: PurpleTheme.lightPurple,
                           onPressed: () {},
                           child: Text(
-                            'Add Group',
+                            'Add split',
                             style: TextStyle(
                               letterSpacing: 1.0,
                               fontSize: 14.0,
@@ -93,7 +77,7 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
                           color: PurpleTheme.lightPurple,
                           onPressed: () {},
                           child: Text(
-                            'Add Outing',
+                            'Add expense',
                             style: TextStyle(
                               letterSpacing: 1.0,
                               fontSize: 14.0,
@@ -111,23 +95,16 @@ class _OutingsState extends State<Outings> with AutomaticKeepAliveClientMixin {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
           child: Tile(
-              avatar: _outingsList[index]['avatar'],
-              title: _outingsList[index]['outing-name'],
-              body: _createBodyForTile(_outingsList[index]['friends']),
-              subtitle: _dateformat.format(_outingsList[index]['date']),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => OutingPage(
-                      name: _outingsList[index]['outing-name'],
-                      avatar: _outingsList[index]['avatar'],
-                    ),
-                  ),
-                );
-              },
-              backgroundColor: PurpleTheme.blue,
-              splashColor: Theme.of(context).splashColor),
+            tag: _expensesList[index]['tag'],
+            avatar: _expensesList[index]['avatar'],
+            title: _expensesList[index]['expense-title'],
+            body: 'at ${_expensesList[index]['location']}',
+            subtitle: _dateformat.format(_expensesList[index]['date']),
+            onTap: () {},
+            backgroundColor: PurpleTheme.blue,
+            splashColor: Theme.of(context).splashColor,
+            amount: 250,
+          ),
         );
       },
     );

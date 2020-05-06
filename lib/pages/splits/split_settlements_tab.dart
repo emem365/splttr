@@ -5,20 +5,20 @@ import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
 
-class OutingSettlementsTab extends StatefulWidget {
+class SplitSettlementsTab extends StatefulWidget {
   @override
-  _OutingSettlementsTabState createState() => _OutingSettlementsTabState();
+  _SplitSettlementsTabState createState() => _SplitSettlementsTabState();
 }
 
-class _OutingSettlementsTabState extends State<OutingSettlementsTab> {
-  List<Map> _outingSettlementsList = DummyData.outingSettlementsList;
+class _SplitSettlementsTabState extends State<SplitSettlementsTab> {
+  List<Map> _splitSettlementsList = DummyData.splitSettlementsList;
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
       child: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        itemCount: _outingSettlementsList.length + 1,
+        itemCount: _splitSettlementsList.length + 1,
         itemBuilder: (_, index) {
           if (index == 0) {
             return FlatButton(
@@ -47,18 +47,18 @@ class _OutingSettlementsTabState extends State<OutingSettlementsTab> {
                         CircleAvatar(
                           radius: 30,
                           child: Avatars.getAssetFromName(
-                              _outingSettlementsList[index]['from-avatar']),
+                              _splitSettlementsList[index]['from-avatar']),
                         ),
                         Icon(FontAwesomeIcons.arrowRight),
                         CircleAvatar(
                           radius: 30,
                           child: Avatars.getAssetFromName(
-                              _outingSettlementsList[index]['to-avatar']),
+                              _splitSettlementsList[index]['to-avatar']),
                         ),
                       ],
                     ),
                     Text(
-                      '${_outingSettlementsList[index]['from']} gives ${Currency.currencyFormat.format(_outingSettlementsList[index]['amount'])} to ${_outingSettlementsList[index]['to']}',
+                      '${_splitSettlementsList[index]['from']} gives ${Currency.currencyFormat.format(_splitSettlementsList[index]['amount'])} to ${_splitSettlementsList[index]['to']}',
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,

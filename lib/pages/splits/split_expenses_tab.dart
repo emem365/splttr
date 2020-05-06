@@ -4,31 +4,42 @@ import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/resources.dart';
 
-class OutingParticipantsTab extends StatefulWidget {
+class SplitExpensesTab extends StatefulWidget {
   @override
-  _OutingParticipantsTabState createState() => _OutingParticipantsTabState();
+  _SplitExpensesTabState createState() => _SplitExpensesTabState();
 }
 
-class _OutingParticipantsTabState extends State<OutingParticipantsTab> {
-  List<Map> _participantsList = DummyData.outingParticipantList;
+class _SplitExpensesTabState extends State<SplitExpensesTab> {
+  List<Map> _splitExpensesList = DummyData.splitExpensesList;
+
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
       child: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        itemCount: _participantsList.length,
+        itemCount: _splitExpensesList.length,
         itemBuilder: (_, index) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 4.0),
             child: SmallAvatarTile(
-              avatar: _participantsList[index]['avatar'],
-              title: _participantsList[index]['username'],
+              avatar: _splitExpensesList[index]['spent-by-avatar'],
+              title: _splitExpensesList[index]['spent-on'],
               subtitle:
-                  'Spent: ${Currency.currencyFormat.format(_participantsList[index]['spent'])}',
+                  'Amount: ${Currency.currencyFormat.format(_splitExpensesList[index]['amount'])}',
               actions: <Widget>[
                 IconButton(
-                  icon: Icon(FontAwesomeIcons.trashAlt),
+                  icon: Icon(
+                    FontAwesomeIcons.edit,
+                    size: 20,
+                  ),
+                  onPressed: () => print('edit'),
+                ),
+                IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.trashAlt,
+                    size: 20,
+                  ),
                   onPressed: () => print('trash'),
                 ),
               ],
