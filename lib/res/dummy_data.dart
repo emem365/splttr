@@ -1,4 +1,118 @@
 class DummyData {
+  static const friends = [
+    {
+      'firstName' : 'blah',
+      'lastName' : 'blah',
+      'username' : 'username1',
+      'avatar' : 'mario',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'bliu',
+      'username' : 'username2',
+      'avatar' : 'yoga',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'blah',
+      'username' : 'username1',
+      'avatar' : 'mario',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'bliu',
+      'username' : 'username2',
+      'avatar' : 'yoga',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'blah',
+      'username' : 'username1',
+      'avatar' : 'mario',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'bliu',
+      'username' : 'username2',
+      'avatar' : 'yoga',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'blah',
+      'username' : 'username1',
+      'avatar' : 'mario',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'bliu',
+      'username' : 'username2',
+      'avatar' : 'yoga',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'blah',
+      'username' : 'username1',
+      'avatar' : 'mario',
+    },
+    {
+      'firstName' : 'blah',
+      'lastName' : 'bliu',
+      'username' : 'username2',
+      'avatar' : 'yoga',
+    },
+  ];
+  static const groups = [
+    {
+      'group-name' : 'group1',
+      'group-avatar' : 'blaster',
+      'members' : ['blah', 'badi', 'bu', 'blah'],
+    },
+    {
+      'group-name' : 'group2',
+      'group-avatar' : 'einstein',
+      'members' : ['blah', 'badi', 'bu'],
+    },
+    {
+      'group-name' : 'group1',
+      'group-avatar' : 'blaster',
+      'members' : ['blah', 'badi', 'bu', 'blah'],
+    },
+    {
+      'group-name' : 'group2',
+      'group-avatar' : 'einstein',
+      'members' : ['blah', 'badi', 'bu'],
+    },
+    {
+      'group-name' : 'group1',
+      'group-avatar' : 'blaster',
+      'members' : ['blah', 'badi', 'bu', 'blah'],
+    },
+    {
+      'group-name' : 'group2',
+      'group-avatar' : 'einstein',
+      'members' : ['blah', 'badi', 'bu'],
+    },
+    {
+      'group-name' : 'group1',
+      'group-avatar' : 'blaster',
+      'members' : ['blah', 'badi', 'bu', 'blah'],
+    },
+    {
+      'group-name' : 'group2',
+      'group-avatar' : 'einstein',
+      'members' : ['blah', 'badi', 'bu'],
+    },
+    {
+      'group-name' : 'group1',
+      'group-avatar' : 'blaster',
+      'members' : ['blah', 'badi', 'bu', 'blah'],
+    },
+    {
+      'group-name' : 'group2',
+      'group-avatar' : 'einstein',
+      'members' : ['blah', 'badi', 'bu'],
+    },
+  ];
   static const usersOweYouList = [
     {
       'username': 'user1',

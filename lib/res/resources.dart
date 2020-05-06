@@ -33,7 +33,7 @@ class SmallAvatarTile extends StatelessWidget {
       @required this.avatar,
       @required this.title,
       subtitle,
-      @required this.onTap,
+      this.onTap,
       this.actions})
       : this.subtitle = subtitle ?? '',
         super(key: key);

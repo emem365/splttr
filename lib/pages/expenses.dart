@@ -150,7 +150,6 @@ class _ExpensesState extends State<Expenses>
                     onPressed: () => print('trash'),
                   ),
                 ],
-                onTap: () => print('tile'),
               ),
             );
           })

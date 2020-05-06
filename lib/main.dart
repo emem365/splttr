@@ -106,6 +106,7 @@ class Menu extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme.headline.copyWith(
           letterSpacing: 2,
           color: Colors.white,
+          fontSize: 20,
         );
     return Material(
       color: Theme.of(context).primaryColor,
@@ -114,15 +115,15 @@ class Menu extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 16.0),
           ),
-          ListTile(
-            onTap: () {
+          FlatButton(
+            onPressed: () {
               print('Link to your profile');
             },
-            title: Row(
+            child: Row(
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: PurpleTheme.pinkishPurple,
-                  minRadius: MediaQuery.of(context).size.width / 6,
+                  minRadius: MediaQuery.of(context).size.width / 8,
                   child: Icon(
                     Icons.person,
                     size: MediaQuery.of(context).size.width / 6,
@@ -153,7 +154,8 @@ class Menu extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
               child: ListView(
                 children: <Widget>[
                   Padding(
@@ -162,7 +164,7 @@ class Menu extends StatelessWidget {
                       leading: Icon(
                         FontAwesomeIcons.search,
                         color: Colors.white70,
-                        size: 24.0,
+                        size: 20.0,
                       ),
                       title: Text(
                         'Search',
@@ -170,41 +172,14 @@ class Menu extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: ListTile(
-                      leading: Icon(
-                        FontAwesomeIcons.userFriends,
-                        color: Colors.white70,
-                        size: 24.0,
-                      ),
-                      title: Text(
-                        'Friends List',
-                        style: _textTheme,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: ListTile(
-                      leading: Icon(
-                        FontAwesomeIcons.rupeeSign,
-                        color: Colors.white70,
-                        size: 24.0,
-                      ),
-                      title: Text(
-                        'Your Expenditure',
-                        style: _textTheme,
-                      ),
-                    ),
-                  ),
+                  Divider(),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(
                         FontAwesomeIcons.userAlt,
                         color: Colors.white70,
-                        size: 24.0,
+                        size: 20.0,
                       ),
                       title: Text(
                         'Your Profile',
@@ -212,13 +187,14 @@ class Menu extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Divider(),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(
                         Icons.settings,
                         color: Colors.white70,
-                        size: 24.0,
+                        size: 20.0,
                       ),
                       title: Text(
                         'Settings',
@@ -226,13 +202,14 @@ class Menu extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Divider(),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       leading: Icon(
                         FontAwesomeIcons.signOutAlt,
                         color: Colors.white70,
-                        size: 24.0,
+                        size: 20.0,
                       ),
                       title: Text(
                         'Logout',
