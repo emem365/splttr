@@ -3,7 +3,7 @@ import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:intl/intl.dart';
-import 'package:splttr/pages/splits/split-description.dart';
+import 'package:splttr/pages/splits/split_description.dart';
 
 class Splits extends StatefulWidget {
   @override

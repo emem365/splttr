@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/colors.dart';
+import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:intl/intl.dart';
@@ -9,9 +11,38 @@ class Expenses extends StatefulWidget {
   _ExpensesState createState() => _ExpensesState();
 }
 
-class _ExpensesState extends State<Expenses> with AutomaticKeepAliveClientMixin {
-  final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
+class _ExpensesState extends State<Expenses>
+    with AutomaticKeepAliveClientMixin {
   List _expensesList = DummyData.expensesList;
+  final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
+  List divisions = List();
+  void seperateDivisions() {
+    DateTime currentDate;
+    int count = -1;
+    _expensesList.forEach((expense) {
+      if (expense['date'] != currentDate) {
+        count++; //if it is not equalto currentdate that would mean it is not in the divisions map yet. We use this lil hack only cz  we knoe the list is sorted
+        divisions.add(List());
+        divisions[count].add(expense);
+        currentDate = expense['date'];
+      } else {
+        divisions[count].add(expense);
+      }
+    });
+  }
+
+  void _sortByDate() {
+    _expensesList.sort((expense1, expense2) {
+      return expense2['date'].compareTo(expense1['date']);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _sortByDate();
+    seperateDivisions();
+  }
 
   @override
   bool get wantKeepAlive => true;
@@ -20,7 +51,7 @@ class _ExpensesState extends State<Expenses> with AutomaticKeepAliveClientMixin 
   Widget build(BuildContext context) {
     super.build(context);
     return ListView.builder(
-      itemCount: _expensesList.length + 1,
+      itemCount: divisions.length + 1,
       itemBuilder: (context, index) {
         if (index == 0)
           return Padding(
@@ -92,21 +123,53 @@ class _ExpensesState extends State<Expenses> with AutomaticKeepAliveClientMixin 
             ),
           );
         index--;
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
-          child: Tile(
-            tag: _expensesList[index]['tag'],
-            avatar: _expensesList[index]['avatar'],
-            title: _expensesList[index]['expense-title'],
-            body: 'at ${_expensesList[index]['location']}',
-            subtitle: _dateformat.format(_expensesList[index]['date']),
-            onTap: () {},
-            backgroundColor: PurpleTheme.blue,
-            splashColor: Theme.of(context).splashColor,
-            amount: 250,
-          ),
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(divisions[index].length, (index) {
+            return Padding(
+              padding:
+                  const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
+              child: SmallAvatarTile(
+                avatar: _expensesList[index]['avatar'],
+                title: _expensesList[index]['expense-title'],
+                subtitle:
+                    'Amount: ${Currency.currencyFormat.format(_expensesList[index]['amount'])}',
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.edit,
+                      size: 20,
+                    ),
+                    onPressed: () => print('edit'),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.trashAlt,
+                      size: 20,
+                    ),
+                    onPressed: () => print('trash'),
+                  ),
+                ],
+                onTap: () => print('tile'),
+              ),
+            );
+          })
+            ..insert(0, Text(_dateformat.format(divisions[index][0]['date'])))
+            ..insert(1, Divider()),
         );
       },
     );
   }
 }
+
+// child: Tile(
+//   tag: _expensesList[index]['tag'],
+//   avatar: _expensesList[index]['avatar'],
+//   title: _expensesList[index]['expense-title'],
+//   body: 'at ${_expensesList[index]['location']}',
+//   subtitle: _dateformat.format(_expensesList[index]['date']),
+//   onTap: () {},
+//   backgroundColor: PurpleTheme.blue,
+//   splashColor: Theme.of(context).splashColor,
+//   amount: (-1) * _expensesList[index]['amount'].abs(),
+// ),
