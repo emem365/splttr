@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/res/empty_list_message.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:intl/intl.dart';
 import 'package:splttr/pages/splits/split_description.dart';
@@ -104,7 +105,14 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                     ),
                   ],
                 ),
-              ],
+                (_splitsList.length == 0)
+                    ? EmptyListEmoticonMessage(
+                        message:
+                            'You have no splits :(\n\nGo ahead, add a split, share your expenses.',
+                        emotion: Emotion.sad,
+                      )
+                    : null,
+              ].where((widget) => widget!=null).toList(),
             ),
           );
         index--;
@@ -121,7 +129,7 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => SplitPage(
-                      tag : _splitsList[index]['tag'],
+                      tag: _splitsList[index]['tag'],
                       name: _splitsList[index]['outing-name'],
                       avatar: _splitsList[index]['avatar'],
                     ),

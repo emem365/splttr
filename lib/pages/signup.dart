@@ -158,7 +158,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           controller: _emailController,
                           validator: (value) {
                             final _allowedLetters =
-                                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.";
                             final _specialCharacters = "!#\$%&'*+-/=?^_`{|}~";
                             if (value.isEmpty) {
                               return 'Please enter a Date';
@@ -199,6 +199,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         child: TextFormField(
+                          readOnly: true,
                           onTap: () {
                             _datePicker(context);
                           },
@@ -206,22 +207,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter a Date';
-                            }
-                            final _allowedLetters = "0123456789/";
-                            if (value.length > 10) {
-                              return 'Enter a valid Date';
-                            }
-                            var lis = value.split('');
-                            for (String char in lis) {
-                              if (!(_allowedLetters.contains(char))) {
-                                return 'Illegal letters present';
-                              }
-                            }
-                            try {
-                              DateTime date = _dateformat.parse(value);
-                              print(date);
-                            } catch (e) {
-                              return 'Invalid Date';
                             }
                             return null;
                           },

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:splttr/res/avatars.dart';
-import 'package:splttr/res/currency.dart';
+import 'package:splttr/res/empty_list_message.dart';
+import 'package:splttr/res/resources.dart';
 import 'package:splttr/res/chart.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/colors.dart';
@@ -27,6 +26,10 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     _youOweUsersList.forEach((user) {
       _youOweUsersTotal += user['amount'];
     });
+    if (_usersOweYouList.length == 0 && _youOweUsersList.length == 0) {
+      _usersOweYouTotal = 1;
+      _youOweUsersTotal = -1;
+    }
     _chartData = [
       OwesDuesChartData(0, _usersOweYouTotal),
       OwesDuesChartData(1, _youOweUsersTotal),
@@ -49,168 +52,173 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
     _buildChartData();
   }
 
+  List<Widget> _buildListViewItems() {
+    List<Widget> items = [
+      Container(
+        padding: EdgeInsets.all(16.0),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.25,
+          height: MediaQuery.of(context).size.width / 1.25,
+          child: Chart(_chartSeries, _total),
+        ),
+      ),
+      Row(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: RaisedButton(
+                padding: EdgeInsets.all(16.0),
+                shape: StadiumBorder(),
+                color: PurpleTheme.lightPurple,
+                onPressed: () {},
+                child: Text(
+                  'Add a friend',
+                  style: TextStyle(
+                    letterSpacing: 1.0,
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: RaisedButton(
+                padding: EdgeInsets.all(16.0),
+                shape: StadiumBorder(),
+                color: PurpleTheme.lightPurple,
+                onPressed: (){},
+                child: Text(
+                  'Split an expense',
+                  style: TextStyle(
+                    letterSpacing: 1.0,
+                    fontSize: 14.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ];
+    if ((_youOweUsersList.length == 0) && (_usersOweYouList.length == 0)) {
+      items.add(EmptyListEmoticonMessage(
+        message: 'All your dues are clear :)',
+        emotion: Emotion.happy,
+      ));
+    } else {
+      if (_usersOweYouList.length > 0) {
+        items
+            .add(OwesOrDuesList(userList: _usersOweYouList, userOwesYou: true));
+      }
+      if (_youOweUsersList.length > 0) {
+        items.add(
+            OwesOrDuesList(userList: _youOweUsersList, userOwesYou: false));
+      }
+    }
+    return items;
+  }
+
   @override
   bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ((_youOweUsersList.length > 0) && (_usersOweYouList.length > 0))
-        ? ListView(
-            children: <Widget>[
-              Container(
-                // margin: EdgeInsets.all(8.0),
-                padding: EdgeInsets.all(16.0),
-                // color: Theme.of(context).canvasColor,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width / 1.25,
-                  height: MediaQuery.of(context).size.width / 1.25,
-                  child: Chart(_chartSeries, _total),
-                ),
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: RaisedButton(
-                        padding: EdgeInsets.all(16.0),
-                        shape: StadiumBorder(),
-                        color: PurpleTheme.lightPurple,
-                        onPressed: () {},
-                        child: Text(
-                          'Add Friend',
-                          style: TextStyle(
-                            letterSpacing: 1.0,
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: RaisedButton(
-                        padding: EdgeInsets.all(16.0),
-                        shape: StadiumBorder(),
-                        color: PurpleTheme.lightPurple,
-                        onPressed: () {},
-                        child: Text(
-                          'Add Expense',
-                          style: TextStyle(
-                            letterSpacing: 1.0,
-                            fontSize: 14.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              (_usersOweYouList.length > 0)
-                  ? _OwesOrDues(userList: _usersOweYouList, userOwesYou: true)
-                  : Container(),
-              (_youOweUsersList.length > 0)
-                  ? _OwesOrDues(userList: _youOweUsersList, userOwesYou: false)
-                  : Container(),
-
-              // _OwesOrDues(userList: _youOweUsersList, userOwesYou: false),
-            ],
-          )
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(
-                FontAwesomeIcons.solidThumbsUp,
-                size: MediaQuery.of(context).size.width / 5,
-                color: Color(0xFF41D9AE),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 32.0),
-              ),
-              Text(
-                'You\'re all caught up!',
-                style: Theme.of(context).textTheme.headline4.copyWith(
-                      color: Color(0xFF41D9AE),
-                    ),
-              ),
-            ],
-          );
-  }
-}
-
-class _OwesOrDues extends StatelessWidget {
-  final List userList;
-  final bool userOwesYou;
-  _OwesOrDues({
-    Key key,
-    @required this.userList,
-    @required this.userOwesYou,
-  })  : assert(userList.length > 0),
-        super(key: key);
-
-  double _getTotal() {
-    double total = 0;
-    userList.forEach((user) {
-      total += user['amount'];
-    });
-    return total;
-  }
-
-  List<Widget> _buildList() {
-    var _color = userOwesYou ? Currency.profitColor : Currency.lossColor;
-    List<Widget> lis = [
-      ListTile(
-        title: Text(
-          userOwesYou ? 'You are due:' : 'You Owe :',
-        ),
-        trailing: Text(
-          '${userOwesYou ? '+' : ''}${Currency.currencyFormat.format(_getTotal())}',
-          style: TextStyle(
-            fontSize: 24.0,
-            color: _color,
-          ),
-        ),
-      ),
-      Divider(),
-    ];
-    userList.forEach((user) {
-      lis.add(ListTile(
-        leading: CircleAvatar(
-          child: Avatars.getAssetFromName(user['avatar']),
-          backgroundColor: _color,
-        ),
-        title: Text(
-          '${user['username']}',
-        ),
-        subtitle: Text(
-          'Last expense from ${user['last_trans']}',
-        ),
-        trailing: Text(
-          '${userOwesYou ? '+' : ''}${Currency.currencyFormat.format(user['amount'])}',
-          style: TextStyle(
-            color: _color,
-          ),
-        ),
-      ));
-      lis.add(Divider());
-    });
-    return lis;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      // padding: EdgeInsets.all(16.0),
-      color: Theme.of(context).canvasColor,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: _buildList()),
-      ),
+    return ListView(
+      children: _buildListViewItems()
     );
   }
 }
+
+// <Widget>[
+//         Container(
+//           // margin: EdgeInsets.all(8.0),
+//           padding: EdgeInsets.all(16.0),
+//           // color: Theme.of(context).canvasColor,
+//           child: SizedBox(
+//             width: MediaQuery.of(context).size.width / 1.25,
+//             height: MediaQuery.of(context).size.width / 1.25,
+//             child: Chart(_chartSeries, _total),
+//           ),
+//         ),
+//         Row(
+//           children: <Widget>[
+//             Expanded(
+//               child: Padding(
+//                 padding: EdgeInsets.all(8.0),
+//                 child: RaisedButton(
+//                   padding: EdgeInsets.all(16.0),
+//                   shape: StadiumBorder(),
+//                   color: PurpleTheme.lightPurple,
+//                   onPressed: () {},
+//                   child: Text(
+//                     'Add a friend',
+//                     style: TextStyle(
+//                       letterSpacing: 1.0,
+//                       fontSize: 14.0,
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             Expanded(
+//               child: Padding(
+//                 padding: EdgeInsets.all(8.0),
+//                 child: RaisedButton(
+//                   padding: EdgeInsets.all(16.0),
+//                   shape: StadiumBorder(),
+//                   color: PurpleTheme.lightPurple,
+//                   onPressed: () {},
+//                   child: Text(
+//                     'Split an expense',
+//                     style: TextStyle(
+//                       letterSpacing: 1.0,
+//                       fontSize: 14.0,
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//         (_usersOweYouList.length > 0)
+//             ? OwesOrDuesList(userList: _usersOweYouList, userOwesYou: true)
+//             : null,
+//         (_youOweUsersList.length > 0)
+//             ? OwesOrDuesList(userList: _youOweUsersList, userOwesYou: false)
+//             : null,
+//         ((_youOweUsersList.length == 0) && (_usersOweYouList.length == 0))
+//             ? SizedBox(
+//                 width: MediaQuery.of(context).size.width / 1.5,
+//                 height: MediaQuery.of(context).size.width / 1.5,
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.center,
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: <Widget>[
+//                     Padding(
+//                       padding: const EdgeInsets.all(16.0),
+//                       child: SizedBox(
+//                         width: MediaQuery.of(context).size.width / 4,
+//                         height: MediaQuery.of(context).size.width / 4,
+//                         child: Image.asset(
+//                           'images/smile.png',
+//                           fit: BoxFit.cover,
+//                         ),
+//                       ),
+//                     ),
+//                     Text(
+//                       'All your dues are clear :)',
+//                       textAlign: TextAlign.center,
+//                       style: Theme.of(context).textTheme.headline6.apply(
+//                             color: CurrencyColors.profitColor,
+//                             fontFamily: 'Montserrat',
+//                           ),
+//                     ),
+//                   ],
+//                 ),
+//               )
+//             : null,
+//         // _OwesOrDues(userList: _youOweUsersList, userOwesYou: false),
+//       ].where((widget) => (widget != null)).toList(),

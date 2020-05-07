@@ -17,7 +17,7 @@ class Chart extends StatelessWidget {
             style: Theme.of(context).textTheme.headline5.copyWith(
                   fontSize: 36,
                   color:
-                      (total > 0) ? Currency.profitColor : Currency.lossColor,
+                      (total >= 0) ? Currency.profitColor : Currency.lossColor,
                 ),
           ),
         ),

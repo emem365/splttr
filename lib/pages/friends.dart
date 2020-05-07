@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/res/empty_list_message.dart';
 import 'package:splttr/res/resources.dart';
 
 class Friends extends StatefulWidget {
@@ -92,7 +93,14 @@ class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin {
                     ),
                   ],
                 ),
-              ],
+                (_friendsList.length == 0)
+                    ? EmptyListEmoticonMessage(
+                        emotion: Emotion.sad,
+                        message:
+                            'You haven\'t added any friends yet :(\nYou can share expenses with friends or a group of friends. Add someone you know to get started.',
+                      )
+                    : null,
+              ].where((widget) => widget != null).toList(),
             ),
           );
         index--;

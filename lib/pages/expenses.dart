@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/res/empty_list_message.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:intl/intl.dart';
 
@@ -119,7 +120,14 @@ class _ExpensesState extends State<Expenses>
                     ),
                   ],
                 ),
-              ],
+                (_expensesList.length == 0)
+                    ? EmptyListEmoticonMessage(
+                        emotion: Emotion.happy,
+                        message:
+                            'You have not added any expenses yet. You can start by pressing the \"Add Expenses\" button :)',
+                      )
+                    : null,
+              ].where((widget) => widget != null).toList(),
             ),
           );
         index--;
