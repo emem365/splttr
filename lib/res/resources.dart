@@ -126,7 +126,7 @@ class Tile extends StatelessWidget {
                               title,
                               style: Theme.of(context)
                                   .textTheme
-                                  .subhead
+                                  .subtitle1
                                   .copyWith(
                                     fontSize: (avatar == null) ? 18.0 : 16.0,
                                   ),
@@ -143,7 +143,7 @@ class Tile extends StatelessWidget {
                             ),
                             child: Text(
                               body,
-                              style: Theme.of(context).textTheme.body1,
+                              style: Theme.of(context).textTheme.bodyText2,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -158,7 +158,7 @@ class Tile extends StatelessWidget {
                             child: Text(
                               subtitle,
                               style:
-                                  Theme.of(context).textTheme.subtitle.copyWith(
+                                  Theme.of(context).textTheme.subtitle2.copyWith(
                                         color: Colors.black54,
                                       ),
                             ),

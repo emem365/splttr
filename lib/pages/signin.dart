@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:splttr/main.dart';
+import 'package:splttr/pages/appscreen.dart';
 import 'package:splttr/res/slide_transition.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 

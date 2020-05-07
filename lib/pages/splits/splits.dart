@@ -57,7 +57,7 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                 ),
                 Text(
                   'Splits',
-                  style: Theme.of(context).textTheme.headline.copyWith(
+                  style: Theme.of(context).textTheme.headline5.copyWith(
                         fontFamily: 'Montserrat',
                       ),
                 ),

@@ -14,7 +14,7 @@ class Chart extends StatelessWidget {
         Center(
           child: Text(
             '${total > 0 ? '+' : ''}${Currency.currencyFormat.format(total)}',
-            style: Theme.of(context).textTheme.headline.copyWith(
+            style: Theme.of(context).textTheme.headline5.copyWith(
                   fontSize: 36,
                   color:
                       (total > 0) ? Currency.profitColor : Currency.lossColor,

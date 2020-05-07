@@ -130,7 +130,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
               ),
               Text(
                 'You\'re all caught up!',
-                style: Theme.of(context).textTheme.display1.copyWith(
+                style: Theme.of(context).textTheme.headline4.copyWith(
                       color: Color(0xFF41D9AE),
                     ),
               ),

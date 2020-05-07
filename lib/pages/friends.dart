@@ -10,7 +10,6 @@ class Friends extends StatefulWidget {
 }
 
 class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin {
-  List _groupsList = DummyData.groups;
   List _friendsList = DummyData.friends;
 
   @override
@@ -46,7 +45,7 @@ class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin {
                 ),
                 Text(
                   'Friends',
-                  style: Theme.of(context).textTheme.headline.copyWith(
+                  style: Theme.of(context).textTheme.headline5.copyWith(
                         fontFamily: 'Montserrat',
                       ),
                 ),

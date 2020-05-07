@@ -88,7 +88,7 @@ class _SplitPageState extends State<SplitPage> {
                                 ' ${widget.name} ',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .headline
+                                    .headline5
                                     .copyWith(
                                       fontFamily: 'Montserrat',
                                       backgroundColor: Colors.white54,
@@ -106,7 +106,7 @@ class _SplitPageState extends State<SplitPage> {
                       indicatorColor: Theme.of(context).primaryColor,
                       unselectedLabelColor: Colors.black54,
                       labelColor: Colors.black,
-                      labelStyle: Theme.of(context).textTheme.headline.copyWith(
+                      labelStyle: Theme.of(context).textTheme.headline5.copyWith(
                             fontSize: 14,
                           ),
                       tabs: [

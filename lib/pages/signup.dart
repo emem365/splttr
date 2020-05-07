@@ -77,7 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               Text(
                 'Sign-up',
-                style: Theme.of(context).textTheme.headline,
+                style: Theme.of(context).textTheme.headline5,
               ),
               Padding(
                 padding:
@@ -356,7 +356,7 @@ class _RegisterUserState extends State<RegisterUser> {
               ),
               Text(
                 'Hi, ${widget.firstName}',
-                style: Theme.of(context).textTheme.headline,
+                style: Theme.of(context).textTheme.headline5,
               ),
               Padding(padding: EdgeInsets.only(top: 32.0)),
               Text(
