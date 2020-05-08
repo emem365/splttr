@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:splttr/res/dialog-service.dart';
 import 'package:splttr/res/empty_list_message.dart';
 import 'package:splttr/res/resources.dart';
 import 'package:splttr/res/chart.dart';
@@ -126,9 +127,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ListView(
-      children: _buildListViewItems()
-    );
+    return ListView(children: _buildListViewItems());
   }
 }
 
