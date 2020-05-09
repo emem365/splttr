@@ -26,10 +26,4 @@ Another prominent feature is the integrated support for paying your dues through
 Planned to be developed using Flutter SDK, the application would make use of “sqflite” flutter package to maintain a SQL database and locally store all transactions. This makes the application usable without any network connection and be accessible all time to the user. The Flutter SDK makes the application available for both Android and IOS. Future versions of the applications may include Firebase as an alternate backend for database management which adds the ability to manage all accounts in real - time. 
 
 
-# The Team
-
--	Madhur Maurya (@emem365)
--	Akhilesh Mittal (@akhil2000mittal)
--	Jayesh Mirchandani (@jayesh-codes)
--	Dharmishta Basita (@mishta-prog)
 
