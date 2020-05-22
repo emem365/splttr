@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
-import 'package:splttr/res/resources.dart';
+import 'package:splttr/widgets/small_avatar_tile.dart';
 
 class SplitParticipantsTab extends StatefulWidget {
   @override

@@ -53,7 +53,7 @@ class _SigninScreenState extends State<SigninScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
-                image: AssetImage('images/banner.png'),
+                image: AssetImage('assets/images/banner.png'),
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.width,
               ),

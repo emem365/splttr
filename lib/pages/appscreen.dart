@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shifting_tabbar/shifting_tabbar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:splttr/pages/home.dart';
-import 'package:splttr/pages/friends.dart';
+import 'package:splttr/pages/friends/friends.dart';
+import 'package:splttr/pages/home/home.dart';
 import 'package:splttr/pages/splits/splits.dart';
-import 'package:splttr/pages/expenses.dart';
-import 'package:splttr/pages/menu.dart';
+import 'package:splttr/pages/expenses/expenses.dart';
+import 'package:splttr/pages/menu/menu.dart';
 
 class AppScreen extends StatelessWidget {
   @override

@@ -6,21 +6,21 @@ enum DialogOptions {
 }
 //Example Dialog Box:
 //                () async {
-//                   DialogOptions response = await showDialog(
-//                       context: context,
-//                       builder: (BuildContext context) {
-//                         return DialogBox(
-//                           content: Text(
-//                               'Do you really want to delete? This action cannot be undone',
-//                               textAlign: TextAlign.center,),
-//                           color: CurrencyColors.lossColor,
-//                         );
-//                       });
-//                   if (response == DialogOptions.approve) {
-//                     print('Approved');
-//                   } else {
-//                     print('Aborted');
-//                   }
+                  // DialogOptions response = await showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) {
+                  //       return DialogBox(
+                  //         content: Text(
+                  //             'Do you really want to delete? This action cannot be undone',
+                  //             textAlign: TextAlign.center,),
+                  //         color: CurrencyColors.lossColor,
+                  //       );
+                  //     });
+                  // if (response == DialogOptions.approve) {
+                  //   print('Approved');
+                  // } else {
+                  //   print('Aborted');
+                  // }
 //                 }
 class DialogBox extends StatelessWidget {
   final String title;

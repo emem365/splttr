@@ -1,43 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
-import 'package:intl/intl.dart';
-import 'package:splttr/pages/splits/split_description.dart';
-import 'package:splttr/widgets/large_avatar_tile.dart';
+import 'package:splttr/widgets/small_avatar_tile.dart';
 
-class Splits extends StatefulWidget {
+class Friends extends StatefulWidget {
   @override
-  _SplitsState createState() => _SplitsState();
+  _FriendsState createState() => _FriendsState();
 }
 
-class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
-  final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
-  List _splitsList = DummyData.splitsList;
+class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin {
+  List _friendsList = DummyData.friends;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   bool get wantKeepAlive => true;
-
-  String _createBodyForTile(List<String> friendsList) {
-    switch (friendsList.length) {
-      case 0:
-        return '';
-      case 1:
-        return 'with ${friendsList[0]}';
-      case 2:
-        return 'with ${friendsList[0]} and ${friendsList[1]}';
-      case 3:
-        return 'with ${friendsList[0]}, ${friendsList[1]} and ${friendsList[2]}';
-      default:
-        return 'with ${friendsList[0]}, ${friendsList[1]} and ${friendsList.length - 2} others';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return ListView.builder(
-      itemCount: _splitsList.length + 1,
+      itemCount: _friendsList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0)
           return Padding(
@@ -51,13 +39,13 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                     width: MediaQuery.of(context).size.width / 3,
                     height: MediaQuery.of(context).size.width / 3,
                     child: Image.asset(
-                      'assets/images/outings.png',
+                      'assets/images/friends.png',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Text(
-                  'Splits',
+                  'Friends',
                   style: Theme.of(context).textTheme.headline5.copyWith(
                         fontFamily: 'Montserrat',
                       ),
@@ -76,7 +64,7 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                           color: PurpleTheme.lightPurple,
                           onPressed: () {},
                           child: Text(
-                            'Add Group',
+                            'Manage groups',
                             style: TextStyle(
                               letterSpacing: 1.0,
                               fontSize: 14.0,
@@ -94,7 +82,7 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                           color: PurpleTheme.lightPurple,
                           onPressed: () {},
                           child: Text(
-                            'Add split',
+                            'Add friend',
                             style: TextStyle(
                               letterSpacing: 1.0,
                               fontSize: 14.0,
@@ -105,39 +93,35 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
                     ),
                   ],
                 ),
-                (_splitsList.length == 0)
+                (_friendsList.length == 0)
                     ? EmptyListEmoticonMessage(
-                        message:
-                            'You have no splits :(\n\nGo ahead, add a split, share your expenses.',
                         emotion: Emotion.sad,
+                        message:
+                            'You haven\'t added any friends yet :(\nYou can share expenses with friends or a group of friends. Add someone you know to get started.',
                       )
                     : null,
-              ].where((widget) => widget!=null).toList(),
+              ].where((widget) => widget != null).toList(),
             ),
           );
         index--;
         return Padding(
           padding: const EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
-          child: LargeAvatarTile(
-              tag: _splitsList[index]['tag'],
-              avatar: _splitsList[index]['avatar'],
-              title: _splitsList[index]['outing-name'],
-              body: _createBodyForTile(_splitsList[index]['friends']),
-              subtitle: _dateformat.format(_splitsList[index]['date']),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => SplitPage(
-                      tag: _splitsList[index]['tag'],
-                      name: _splitsList[index]['outing-name'],
-                      avatar: _splitsList[index]['avatar'],
-                    ),
-                  ),
-                );
-              },
-              backgroundColor: PurpleTheme.blue,
-              splashColor: Theme.of(context).splashColor),
+          child: SmallAvatarTile(
+            avatar: _friendsList[index]['avatar'],
+            title: _friendsList[index]['firstName'] +
+                ' ' +
+                _friendsList[index]['lastName'],
+            subtitle: _friendsList[index]['username'],
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.trashAlt,
+                  size: 20,
+                ),
+                onPressed: () => print('trash'),
+              ),
+            ],
+          ),
         );
       },
     );

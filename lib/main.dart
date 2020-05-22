@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:splttr/res/colors.dart';
-import 'package:splttr/pages/signin.dart';
-import 'package:splttr/pages/signup.dart';
+import 'package:splttr/pages/login/signin.dart';
+import 'package:splttr/pages/login/signup.dart';
 import 'package:splttr/pages/appscreen.dart';
 
 
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         textTheme:
             Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
-      // home: OutingPage(),
-      initialRoute: '/home',
+      // home: AddSplit(),
+      initialRoute: '/',
       routes: {
         '/': (context) => SigninScreen(),
         '/home': (context) => AppScreen(),

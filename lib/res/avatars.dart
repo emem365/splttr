@@ -67,7 +67,7 @@ class Avatars {
 
   static String getPathFromName(String name) {
     if (avatarList.contains(name))
-      return 'images/avatars/$name.png';
+      return 'assets/images/avatars/$name.png';
     else
       return null;
   }

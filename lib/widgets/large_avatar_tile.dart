@@ -1,68 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/currency.dart';
-import 'package:splttr/res/colors.dart';
 
-class TabBarWithBackground extends StatelessWidget
-    implements PreferredSizeWidget {
-  final Color backgroundColor;
-  final TabBar tabBar;
-
-  TabBarWithBackground({this.tabBar, this.backgroundColor})
-      : assert(tabBar != null);
-
-  @override
-  Size get preferredSize => tabBar.preferredSize;
-
-  @override
-  Widget build(BuildContext context) => Container(
-        child: tabBar,
-        color: backgroundColor,
-      );
-}
-
-class SmallAvatarTile extends StatelessWidget {
-  final String avatar;
-  final String title;
-  final String subtitle;
-  final void Function() onTap;
-  final List<Widget> actions;
-
-  const SmallAvatarTile(
-      {Key key,
-      @required this.avatar,
-      @required this.title,
-      subtitle,
-      this.onTap,
-      this.actions})
-      : this.subtitle = subtitle ?? '',
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: PurpleTheme.blue,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        child: ListTile(
-          leading: CircleAvatar(
-            child: Avatars.getAssetFromName(avatar),
-          ),
-          title: Text(title),
-          subtitle: Text(
-            subtitle,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          ),
-          trailing: Row(mainAxisSize: MainAxisSize.min, children: actions),
-          onTap: onTap,
-        ),
-      ),
-    );
-  }
-}
-
-class Tile extends StatelessWidget {
+class LargeAvatarTile extends StatelessWidget {
   final String tag;
   final String avatar;
   final String title;
@@ -73,7 +13,7 @@ class Tile extends StatelessWidget {
   final Color splashColor;
   final Color backgroundColor;
 
-  const Tile({
+  const LargeAvatarTile({
     Key key,
     this.tag,
     this.avatar,
@@ -186,83 +126,6 @@ class Tile extends StatelessWidget {
             ].where((test) => test != null).toList(),
           ),
         ),
-      ),
-    );
-  }
-}
-
-
-class OwesOrDuesList extends StatelessWidget {
-  final List userList;
-  final bool userOwesYou;
-  OwesOrDuesList({
-    Key key,
-    @required this.userList,
-    @required this.userOwesYou,
-  })  : assert(userList.length > 0),
-        super(key: key);
-
-  double _getTotal() {
-    double total = 0;
-    userList.forEach((user) {
-      total += user['amount'];
-    });
-    return total;
-  }
-
-  List<Widget> _buildList() {
-    var _color = userOwesYou ? Currency.profitColor : Currency.lossColor;
-    List<Widget> lis = [
-      ListTile(
-        title: Text(
-          userOwesYou ? 'You are due:' : 'You Owe :',
-        ),
-        trailing: Text(
-          '${userOwesYou ? '+' : ''}${Currency.currencyFormat.format(_getTotal())}',
-          style: TextStyle(
-            fontSize: 24.0,
-            color: _color,
-          ),
-        ),
-      ),
-      Divider(),
-    ];
-    userList.forEach((user) {
-      lis.add(ListTile(
-        leading: CircleAvatar(
-          child: Avatars.getAssetFromName(user['avatar']),
-          backgroundColor: _color,
-        ),
-        title: Text(
-          '${user['username']}',
-        ),
-        subtitle: Text(
-          'Last expense from ${user['last_trans']}',
-        ),
-        trailing: Text(
-          '${userOwesYou ? '+' : ''}${Currency.currencyFormat.format(user['amount'])}',
-          style: TextStyle(
-            color: _color,
-          ),
-        ),
-      ));
-      lis.add(Divider());
-    });
-    return lis;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(8.0),
-      // padding: EdgeInsets.all(16.0),
-      color: Theme.of(context).canvasColor,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: _buildList()),
       ),
     );
   }

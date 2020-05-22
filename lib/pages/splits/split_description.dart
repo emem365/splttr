@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/avatars.dart';
-import 'package:splttr/res/resources.dart';
+import 'package:splttr/widgets/tab_bar_with_background.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/splits/split_expenses_tab.dart';
 import 'package:splttr/pages/splits/split_settlements_tab.dart';
@@ -67,7 +67,7 @@ class _SplitPageState extends State<SplitPage> {
                     background: Stack(
                       children: <Widget>[
                         Image.asset(
-                          'images/outings-banner-light-purple.png',
+                          'assets/images/outings-banner-light-purple.png',
                           fit: BoxFit.fill,
                           width: MediaQuery.of(context).size.width,
                         ),

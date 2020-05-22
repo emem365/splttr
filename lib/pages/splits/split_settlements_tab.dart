@@ -4,7 +4,7 @@ import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
-import 'package:splttr/res/empty_list_message.dart';
+import 'package:splttr/widgets/empty_list_message.dart';
 
 class SplitSettlementsTab extends StatefulWidget {
   @override

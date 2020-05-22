@@ -37,10 +37,10 @@ dev_dependencies:
   flutter_launcher_icons: "^0.7.5"
 
 flutter_icons:
-  image_path: "images/icons/logo-1.png"
+  image_path: "assets/images/icons/logo-1.png"
   android: true
   adaptive_icon_background: "#a988f2"
-  adaptive_icon_foreground: "images/icons/logo-1-front.png"
+  adaptive_icon_foreground: "assets/images/icons/logo-1-front.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -55,8 +55,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - images/
-   - images/avatars/
+   - assets/
+   - assets/images/
+   - assets/images/avatars/
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -68,45 +69,45 @@ flutter:
   fonts:
     - family: Montserrat
       fonts:
-        - asset: fonts/montserrat/Montserrat-Black.ttf
-        - asset: fonts/montserrat/Montserrat-BlackItalic.ttf
-        - asset: fonts/montserrat/Montserrat-Bold.ttf
-        - asset: fonts/montserrat/Montserrat-BoldItalic.ttf
-        - asset: fonts/montserrat/Montserrat-ExtraBold.ttf
-        - asset: fonts/montserrat/Montserrat-ExtraBoldItalic.ttf
-        - asset: fonts/montserrat/Montserrat-ExtraLight.ttf
-        - asset: fonts/montserrat/Montserrat-ExtraLightItalic.ttf
-        - asset: fonts/montserrat/Montserrat-Italic.ttf
-        - asset: fonts/montserrat/Montserrat-Light.ttf
-        - asset: fonts/montserrat/Montserrat-LightItalic.ttf
-        - asset: fonts/montserrat/Montserrat-Medium.ttf
-        - asset: fonts/montserrat/Montserrat-MediumItalic.ttf
-        - asset: fonts/montserrat/Montserrat-Regular.ttf
-        - asset: fonts/montserrat/Montserrat-SemiBold.ttf
-        - asset: fonts/montserrat/Montserrat-SemiBoldItalic.ttf
-        - asset: fonts/montserrat/Montserrat-Thin.ttf
-        - asset: fonts/montserrat/Montserrat-ThinItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Black.ttf
+        - asset: assets/fonts/montserrat/Montserrat-BlackItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Bold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-BoldItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-ExtraBold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-ExtraBoldItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-ExtraLight.ttf
+        - asset: assets/fonts/montserrat/Montserrat-ExtraLightItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Italic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Light.ttf
+        - asset: assets/fonts/montserrat/Montserrat-LightItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Medium.ttf
+        - asset: assets/fonts/montserrat/Montserrat-MediumItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Regular.ttf
+        - asset: assets/fonts/montserrat/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/montserrat/Montserrat-SemiBoldItalic.ttf
+        - asset: assets/fonts/montserrat/Montserrat-Thin.ttf
+        - asset: assets/fonts/montserrat/Montserrat-ThinItalic.ttf
 
     - family: Merriweather
       fonts:
-        - asset: fonts/merriweather/Merriweather-Black.ttf
+        - asset: assets/fonts/merriweather/Merriweather-Black.ttf
           weight: 900
-        - asset: fonts/merriweather/Merriweather-BlackItalic.ttf
+        - asset: assets/fonts/merriweather/Merriweather-BlackItalic.ttf
           weight: 900
           style: italic
-        - asset: fonts/merriweather/Merriweather-Bold.ttf
+        - asset: assets/fonts/merriweather/Merriweather-Bold.ttf
           weight: 700
-        - asset: fonts/merriweather/Merriweather-BoldItalic.ttf
+        - asset: assets/fonts/merriweather/Merriweather-BoldItalic.ttf
           weight: 700
           style: italic
-        - asset: fonts/merriweather/Merriweather-Italic.ttf
+        - asset: assets/fonts/merriweather/Merriweather-Italic.ttf
           style: italic
-        - asset: fonts/merriweather/Merriweather-Light.ttf
+        - asset: assets/fonts/merriweather/Merriweather-Light.ttf
           weight: 300
-        - asset: fonts/merriweather/Merriweather-LightItalic.ttf
+        - asset: assets/fonts/merriweather/Merriweather-LightItalic.ttf
           weight: 300
           style: italic
-        - asset: fonts/merriweather/Merriweather-Regular.ttf
+        - asset: assets/fonts/merriweather/Merriweather-Regular.ttf
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

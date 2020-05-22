@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
-import 'package:splttr/res/empty_list_message.dart';
-import 'package:splttr/res/resources.dart';
+import 'package:splttr/widgets/empty_list_message.dart';
+import 'package:splttr/widgets/small_avatar_tile.dart';
 
 class SplitExpensesTab extends StatefulWidget {
   @override
