@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splttr/pages/pick_avatar_screen.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/widgets/dialog-service.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,7 @@ class _AddExpenseState extends State<AddExpense> {
   final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
 
   String _initialDate;
+  String _avatar = '';
   TextEditingController _expenseTitleController;
 
   TextEditingController _expenseDescriptionController;
@@ -112,8 +114,15 @@ class _AddExpenseState extends State<AddExpense> {
                             children: <Widget>[
                               PickAvatar(
                                 radius: MediaQuery.of(context).size.width / 6,
-                                avatar: '',
-                                onTap: () {},
+                                avatar: _avatar,
+                                onTap: () async {
+                                  _avatar = await Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PickAvatarScreen(),
+                                    ),
+                                  );
+                                  setState((){});
+                                },
                               ),
                               Padding(
                                 padding: EdgeInsets.all(16.0),

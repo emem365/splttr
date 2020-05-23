@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:splttr/pages/pick_avatar_screen.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/widgets/dialog-service.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +14,7 @@ class _AddSplitState extends State<AddSplit> {
   final _formKey = GlobalKey<FormState>();
 
   final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
-
+  String _avatar = '';
   String _initialDate;
   TextEditingController _outingTitleController;
 
@@ -76,10 +77,17 @@ class _AddSplitState extends State<AddSplit> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             PickAvatar(
-                              radius: MediaQuery.of(context).size.width / 6,
-                              avatar: '',
-                              onTap: () {},
-                            ),
+                                radius: MediaQuery.of(context).size.width / 6,
+                                avatar: _avatar,
+                                onTap: () async {
+                                  _avatar = await Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PickAvatarScreen(),
+                                    ),
+                                  );
+                                  setState((){});
+                                },
+                              ),
                             Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text(
