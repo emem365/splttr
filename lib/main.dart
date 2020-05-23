@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splttr/pages/expenses/add_expense.dart';
+import 'package:splttr/pages/pick_avatar_screen.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/login/signin.dart';
 import 'package:splttr/pages/login/signup.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => SigninScreen(),
         '/home': (context) => AppScreen(),
         '/signup': (context) => SignupScreen(),
-        '/add_expense': (context) => AddExpense(),
+        '/add_expense': (context) => PickAvatarScreen(),
       },
     );
   }

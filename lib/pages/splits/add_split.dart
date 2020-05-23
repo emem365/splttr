@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/widgets/dialog-service.dart';
 import 'package:intl/intl.dart';
-import 'package:splttr/widgets/pack_avatar.dart';
+import 'package:splttr/widgets/pick_avatar.dart';
 
 class AddSplit extends StatefulWidget {
   @override
