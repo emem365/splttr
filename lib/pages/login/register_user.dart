@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:splttr/data/user.dart';
-
+import 'package:splttr/database/user.dart';
+import 'package:splttr/database/datahelper.dart';
+import 'dart:io';
 
 class RegisterUser extends StatefulWidget {
   final String firstName;
@@ -21,9 +22,17 @@ class RegisterUser extends StatefulWidget {
 }
 
 class _RegisterUserState extends State<RegisterUser> {
+  var dbHelper;
+  var users;
   Future registerUser(User newuser) async {
-    //register user
-    await Future.delayed(Duration(seconds: 3));
+    dbHelper.save(newuser);
+    users = await dbHelper.getUsers();
+    stderr.write('Printing data');
+    stderr.write(users);
+    stderr.write('kokoko');
+    stderr.write(users.length);
+    users.forEach((user)=> stderr.write(user.firstName));
+    // await Future.delayed(Duration(seconds: 3));
   }
 
   bool _isProcessing;
@@ -36,6 +45,7 @@ class _RegisterUserState extends State<RegisterUser> {
   @override
   void initState() {
     super.initState();
+    dbHelper = DBHelper();
     _usernameController = new TextEditingController();
     _passwordController = new TextEditingController();
     _repasswordController = new TextEditingController();
@@ -62,8 +72,8 @@ class _RegisterUserState extends State<RegisterUser> {
       password: _passwordController.text,
     );
 
-    registerUser(newuser)
-        .then((_) => Navigator.popUntil(context, ModalRoute.withName('/')));
+    registerUser(newuser);
+        // .then((_) => Navigator.popUntil(context, ModalRoute.withName('/')));
   }
 
   bool checkUsernameExists(String value) {
