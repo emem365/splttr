@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:splttr/pages/choose_participants_by_group.dart';
 import 'package:splttr/res/avatars.dart';
 
 class PickAvatarScreen extends StatefulWidget {
