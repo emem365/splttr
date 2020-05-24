@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:splttr/pages/friends/groups.dart';
-import 'package:splttr/pages/friends/view_group.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/login/signin.dart';
 import 'package:splttr/pages/login/signup.dart';
@@ -28,7 +26,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => SigninScreen(),
         '/home': (context) => AppScreen(),
         '/signup': (context) => SignupScreen(),
-        '/groups':(context) => ViewGroup(),
       },
     );
   }
