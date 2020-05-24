@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:splttr/database/user.dart';
 import 'package:splttr/database/datahelper.dart';
-import 'dart:io';
 
 class RegisterUser extends StatefulWidget {
   final String firstName;
@@ -24,15 +23,16 @@ class RegisterUser extends StatefulWidget {
 class _RegisterUserState extends State<RegisterUser> {
   var dbHelper;
   var users;
+  bool validUserName = true;
   Future registerUser(User newuser) async {
     dbHelper.save(newuser);
-    users = await dbHelper.getUsers();
-    stderr.write('Printing data');
-    stderr.write(users);
-    stderr.write('kokoko');
-    stderr.write(users.length);
-    users.forEach((user)=> stderr.write(user.firstName));
+    // users.forEach((user)=> print(user));
     // await Future.delayed(Duration(seconds: 3));
+  }
+
+  Future<List> getUserNames() async {
+    var userNames = await dbHelper.getUserNames();
+    return userNames;
   }
 
   bool _isProcessing;
@@ -51,33 +51,48 @@ class _RegisterUserState extends State<RegisterUser> {
     _repasswordController = new TextEditingController();
     _isProcessing = false;
   }
+
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     _repasswordController.dispose();
   }
 
-  void processUserData() {
-    setState((){
-      _isProcessing = true;
-    });
-    User newuser = User(
-      firstName: widget.firstName,
-      lastName: widget.lastName,
-      email: widget.email,
-      dob: widget.dob,
-      username: _usernameController.text,
-      password: _passwordController.text,
-    );
+  void processUserData() async {
+    validUserName = await checkUsernameExists(_usernameController.text);
+    if (!validUserName) {
+      setState(() {
+        _isProcessing = false;
+        validUserName = false;
+        _formKey.currentState.validate();
+      });
+    } else {
+      setState(() {
+        _isProcessing = true;
+      });
+      User newuser = User(
+        firstName: widget.firstName,
+        lastName: widget.lastName,
+        email: widget.email,
+        dob: widget.dob,
+        username: _usernameController.text,
+        password: _passwordController.text,
+      );
 
-    registerUser(newuser);
-        // .then((_) => Navigator.popUntil(context, ModalRoute.withName('/')));
+      registerUser(newuser)
+          .then((_) => Navigator.popUntil(context, ModalRoute.withName('/')));
+    }
   }
 
-  bool checkUsernameExists(String value) {
-    return false;
+  Future<bool> checkUsernameExists(String value) async {
+    var userNames = await getUserNames();
+    if (!userNames.contains(value)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -143,8 +158,11 @@ class _RegisterUserState extends State<RegisterUser> {
                                 return 'Illegal letters present';
                               }
                             }
-                            if (checkUsernameExists(value))
+                            if (!validUserName) {
+                              validUserName = true;
+
                               return 'Already exists. Try something else';
+                            }
                             return null;
                           },
                           cursorColor: Theme.of(context).primaryColor,

@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 class User {
-  int id;
   String firstName;
   String lastName;
   String username;
@@ -8,7 +7,7 @@ class User {
   String password;
   DateTime dob;
 
-  User({this.id,
+  User({
   this.firstName,
   this.lastName,
   this.dob,
@@ -19,7 +18,6 @@ class User {
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      'id':id,
       'firstName': firstName,
       'lastName': lastName,
       'username': username,
@@ -31,13 +29,21 @@ class User {
   }
  final DateFormat _dateformat = DateFormat('yyyy-MM-dd');
   User.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
     firstName = map['firstName'];
     lastName = map['lastName'];
     username = map['username'];
     email = map['email'];
     password = map['password'];
     dob = _dateformat.parse(map['dob']);
-    // dob = map['dob'].parse(DateTime);
   }
+  User.fromMapName(Map<String, dynamic> map) {
+    // firstName = map['firstName'];
+    // lastName = map['lastName'];
+    username = map['username'];
+    // email = map['email'];
+    // password = map['password'];
+    // dob = _dateformat.parse(map['dob']);
+  }
+  
+
 }

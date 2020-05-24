@@ -26,7 +26,7 @@ class DBHelper {
 
   _onCreate(Database db, int version) async {
     await db
-        .execute("CREATE TABLE Users (id INTEGER PRIMARY KEY,username VARCHAR, firstName TEXT, lastName TEXT, password VARCHAR, mobile INTEGER, email VARCHAR, dob VARCHAR )");
+        .execute("CREATE TABLE Users (username VARCHAR PRIMARY KEY, firstName TEXT, lastName TEXT, password VARCHAR, mobile INTEGER, email VARCHAR, dob VARCHAR )");
     await db.execute("CREATE TABLE Groups (groupName VARCHAR PRIMARY KEY, doc VARCHAR)");
     await db.execute("CREATE TABLE Outings (outingName VARCHAR PRIMARY KEY, date VARCHAR, place VARCHAR)");
     await db.execute("CREATE TABLE Group_members (groupName VARCHAR, member VARCHAR,FOREIGN KEY(groupName) REFERENCES Groups(groupName),FOREIGN KEY(member) REFERENCES Users(userName))");
@@ -41,7 +41,7 @@ class DBHelper {
 
   Future<User> save(User user) async {
     var dbClient = await db;
-    user.id = await dbClient.insert('Users', user.toMap());
+    await dbClient.insert('Users', user.toMap());
     return user;
     /*
     await dbClient.transaction((txn) async {
@@ -64,16 +64,42 @@ class DBHelper {
     return users;
   }
 
-  Future<int> delete(int id) async {
+  Future<List<String>> getUserNames() async {
     var dbClient = await db;
-    return await dbClient.delete('Users', where: 'id = ?', whereArgs: [id]);
+    // List<Map> userNames = await dbClient.query('Users', columns: ['username']);
+    List<Map> userNames = await dbClient.rawQuery("SELECT * FROM Users");
+    List<String> userName = [];
+    if (userNames.length > 0) {
+      for (int i = 0; i < userNames.length; i++) {
+        userName.add(User.fromMap(userNames[i]).username);
+      }
+    }
+    return userName;
   }
+  Future<String> checkPass(String userName) async {
+    var dbClient = await db;
+    // await dbClient.transaction((txn) async {
+    //   var query = "INSERT INTO $TABLE ($NAME) VALUES ('" + user.name + "')";
+    //   return await txn.rawInsert(query);
 
-  Future<int> update(User user) async {
-    var dbClient = await db;
-    return await dbClient.update('Users', user.toMap(),
-        where: 'id = ?', whereArgs: [user.id]);
+  List<Map> result = await dbClient.rawQuery('SELECT * FROM Users WHERE userName=?', [userName]);
+
+    // print the results
+    var a;
+    result.forEach((row) => a = User.fromMap(row).password);
+    return a;
+
   }
+  // Future<int> delete(int id) async {
+  //   var dbClient = await db;
+  //   return await dbClient.delete('Users', where: 'id = ?', whereArgs: [id]);
+  // }
+
+  // Future<int> update(User user) async {
+  //   var dbClient = await db;
+  //   return await dbClient.update('Users', user.toMap(),
+  //       where: 'id = ?', whereArgs: [user.id]);
+  // }
 
   Future close() async {
     var dbClient = await db;

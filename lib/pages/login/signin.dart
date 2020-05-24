@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:splttr/pages/appscreen.dart';
 import 'package:splttr/res/slide_transition.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:splttr/database/datahelper.dart';
 
 class SigninScreen extends StatefulWidget {
   @override
@@ -10,18 +10,18 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
-  Future _getData() async {
-    await Future.delayed(Duration(seconds: 3));
-  }
 
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   var _isProcessing;
+  var dbHelper;
+  bool validDetails = true;
 
   @override
   void initState() {
     super.initState();
+    dbHelper = DBHelper();
     _isProcessing = false;
   }
 
@@ -32,15 +32,30 @@ class _SigninScreenState extends State<SigninScreen> {
     super.dispose();
   }
 
-  void _processUserData(String username, String password) {
-    print('Check username and password');
-    print('$username and $password');
-    print('If valid load new page');
-    setState(() {
+  void _processUserData(String username, String password) async {
+    var userNames = await dbHelper.getUserNames();
+    if (userNames.contains(username)) {
+      var pass = await dbHelper.checkPass(username);
+      if (pass == password){
+        setState(() {
       _isProcessing = true;
     });
-    _getData().then((_) =>
-        Navigator.of(context).pushReplacement(SlideRoute(widget: AppScreen())));
+        Navigator.of(context).pushReplacement(SlideRoute(widget: AppScreen()));
+      }
+      else{
+        setState(() {
+          _isProcessing = false;
+          validDetails = false;
+          _formKey.currentState.validate();
+        });
+      }
+    } else {
+      setState(() {
+          _isProcessing = false;
+          validDetails = false;
+          _formKey.currentState.validate();
+        });
+    }
   }
 
   @override
@@ -111,6 +126,13 @@ class _SigninScreenState extends State<SigninScreen> {
                         child: TextFormField(
                           enabled: !_isProcessing,
                           controller: _passwordController,
+                          validator: (value) {
+                          if(!validDetails){
+                            validDetails = true;
+                            return 'Invalid UserName or Password';
+                          }
+                          return null;
+                        },
                           cursorColor: Theme.of(context).primaryColor,
                           obscureText: true,
                           decoration: InputDecoration(
