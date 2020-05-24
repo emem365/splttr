@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:splttr/database/user.dart';
 import 'package:splttr/database/datahelper.dart';
+import 'package:splttr/pages/pick_avatar_screen.dart';
 
 class RegisterUser extends StatefulWidget {
   final String firstName;
@@ -37,7 +38,7 @@ class _RegisterUserState extends State<RegisterUser> {
 
   bool _isProcessing;
   final _formKey = GlobalKey<FormState>();
-
+  String _avatar = '';
   TextEditingController _usernameController;
   TextEditingController _passwordController;
   TextEditingController _repasswordController;
@@ -106,12 +107,19 @@ class _RegisterUserState extends State<RegisterUser> {
             // mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 48, bottom: 16),
-                child: Image(
-                  image: AssetImage('assets/images/banner.png'),
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.width / 3,
-                ),
+                padding: EdgeInsets.only(top: 100, bottom: 16,),
+                child:  PickAvatar(
+                                radius: MediaQuery.of(context).size.width / 6,
+                                avatar: _avatar,
+                                onTap: () async {
+                                  _avatar = await Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PickAvatarScreen(),
+                                    ),
+                                  );
+                                  setState((){});
+                                },
+                              ),
               ),
               Text(
                 'Hi, ${widget.firstName}',

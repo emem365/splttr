@@ -27,6 +27,22 @@ class LargeAvatarTile extends StatelessWidget {
   })  : assert((avatar == null) ? (tag == null) : (tag != null)),
         super(key: key);
 
+
+  static String createBodyFromList(List<String> list){
+     switch (list.length) {
+      case 0:
+        return '';
+      case 1:
+        return 'with ${list[0]}';
+      case 2:
+        return 'with ${list[0]} and ${list[1]}';
+      case 3:
+        return 'with ${list[0]}, ${list[1]} and ${list[2]}';
+      default:
+        return 'with ${list[0]}, ${list[1]} and ${list.length - 2} others';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(

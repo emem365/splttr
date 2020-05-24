@@ -1,54 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:splttr/pages/pick_avatar_screen.dart';
-import 'package:splttr/res/colors.dart';
-import 'package:splttr/widgets/dialog-service.dart';
-import 'package:intl/intl.dart';
 import 'package:splttr/widgets/pick_avatar.dart';
 
-class AddSplit extends StatefulWidget {
+class AddGroup extends StatefulWidget {
   @override
-  _AddSplitState createState() => _AddSplitState();
+  _AddGroupState createState() => _AddGroupState();
 }
 
-class _AddSplitState extends State<AddSplit> {
+class _AddGroupState extends State<AddGroup> {
   final _formKey = GlobalKey<FormState>();
 
-  final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
-  String _avatar = '';
-  String _initialDate;
-  TextEditingController _outingTitleController;
+  String _groupAvatar = '';
+  DateTime _dateOfCreation;
+  TextEditingController _groupNameController;
+  TextEditingController _groupDescriptionController;
 
-  TextEditingController _outingDescriptionController;
-
-  TextEditingController _outingStartDateController;
-
-  void _datePicker(BuildContext context) async {
-    final DateTime date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1970),
-      lastDate: DateTime.now(),
-    );
-    print(date);
-    if (date == null) return;
-    _outingStartDateController.text = _dateformat.format(date);
-  }
 
   @override
   void initState() {
     super.initState();
-    _outingTitleController = TextEditingController();
-    _outingDescriptionController = TextEditingController();
-    _outingStartDateController = TextEditingController();
-    _initialDate = _dateformat.format(DateTime.now());
-    _outingStartDateController.text = _initialDate;
+    _groupNameController = TextEditingController();
+    _groupDescriptionController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _outingTitleController.dispose();
-    _outingDescriptionController.dispose();
-    _outingStartDateController.dispose();
+        _groupNameController.dispose();
+    _groupDescriptionController.dispose();
     super.dispose();
   }
 
@@ -68,7 +46,7 @@ class _AddSplitState extends State<AddSplit> {
                     Stack(
                       children: <Widget>[
                         Image.asset(
-                          'assets/images/outings-banner-light-purple.png',
+                          'assets/images/friends-banner.png',
                           fit: BoxFit.cover,
                           width: MediaQuery.of(context).size.width,
                         ),
@@ -78,9 +56,9 @@ class _AddSplitState extends State<AddSplit> {
                           children: <Widget>[
                             PickAvatar(
                                 radius: MediaQuery.of(context).size.width / 6,
-                                avatar: _avatar,
+                                avatar: _groupAvatar,
                                 onTap: () async {
-                                  _avatar = await Navigator.of(context).push(
+                                  _groupAvatar = await Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => PickAvatarScreen(),
                                     ),
@@ -91,7 +69,7 @@ class _AddSplitState extends State<AddSplit> {
                             Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text(
-                                ' Choose an avatar ',
+                                ' Choose group avatar ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline5
@@ -109,32 +87,7 @@ class _AddSplitState extends State<AddSplit> {
                             children: <Widget>[
                               IconButton(
                                 icon: Icon(Icons.arrow_back_ios),
-                                onPressed: () async {
-                                  var _title = _outingTitleController.text;
-                                  var _description =
-                                      _outingDescriptionController.text;
-                                  var _date = _outingStartDateController.text;
-                                  if (_title == '' &&
-                                      _description == '' &&
-                                      _date == _initialDate) {
-                                    Navigator.of(context).pop();
-                                    return;
-                                  }
-                                  DialogOptions response = await showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return DialogBox(
-                                          content: Text(
-                                            'Do you want to discard changes?',
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          color: CurrencyColors.lossColor,
-                                        );
-                                      });
-                                  if (response == DialogOptions.approve) {
-                                    Navigator.of(context).pop();
-                                  }
-                                },
+                                onPressed: null,
                               )
                             ],
                           ),
@@ -152,17 +105,17 @@ class _AddSplitState extends State<AddSplit> {
                   right: 24.0,
                 ),
                 child: TextFormField(
-                  controller: _outingTitleController,
+                  controller: _groupNameController,
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please Enter a Title';
+                      return 'Group Name';
                     }
                     return null;
                   },
                   cursorColor: Theme.of(context).primaryColor,
                   decoration: InputDecoration(
                     alignLabelWithHint: true,
-                    labelText: 'Title',
+                    labelText: 'Group Name',
                   ),
                 ),
               ),
@@ -173,33 +126,17 @@ class _AddSplitState extends State<AddSplit> {
                 ),
                 // padding: const EdgeInsets.all(24.0),
                 child: TextFormField(
-                  controller: _outingDescriptionController,
+                  controller: _groupDescriptionController,
                   cursorColor: Theme.of(context).primaryColor,
                   decoration: InputDecoration(
                     alignLabelWithHint: true,
                     labelText: 'Description',
-                    hintText: '(location, etc. - Optional)',
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12.0,
-                  horizontal: 24.0,
-                ),
-                // padding: const EdgeInsets.all(24.0),
-                child: TextFormField(
-                  controller: _outingStartDateController,
-                  readOnly: true,
-                  onTap: () {
-                    _datePicker(context);
-                  },
-                  cursorColor: Theme.of(context).primaryColor,
-                  decoration: InputDecoration(
-                    alignLabelWithHint: true,
-                    labelText: 'Select a start date',
-                  ),
-                ),
+                padding: const EdgeInsets.all(36.0),
+                child: Text('No friends in this group')
               ),
               Padding(
                 padding: const EdgeInsets.all(36.0),
@@ -210,11 +147,12 @@ class _AddSplitState extends State<AddSplit> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
+                      _dateOfCreation = DateTime.now();
                       print('process Data');
                     }
-                  },
+                  },                 
                   child: Text(
-                    'Select Participants',
+                    'Select members',
                     style: TextStyle(
                       color: Colors.white,
                     ),
