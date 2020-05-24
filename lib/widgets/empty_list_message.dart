@@ -17,12 +17,12 @@ class EmptyListEmoticonMessage extends StatelessWidget {
     switch (emotion) {
       case Emotion.sad:
         return Image.asset(
-          'images/sad.png',
+          'assets/images/sad.png',
           fit: BoxFit.cover,
         );
       case Emotion.happy:
         return Image.asset(
-          'images/smile.png',
+          'assets/images/smile.png',
           fit: BoxFit.cover,
         );
       default:

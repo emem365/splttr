@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splttr/pages/friends/add_group.dart';
+import 'package:splttr/pages/profiles/profile_page.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/login/signin.dart';
 import 'package:splttr/pages/login/signup.dart';
@@ -22,12 +23,17 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
       // home: AddSplit(),
-      initialRoute: '/add_group',
+      initialRoute: '/',
       routes: {
-        '/': (context) => SigninScreen(),
+        '/': (context) => ProfilePage(
+          tag: '100001',
+          name: 'Madhur Maurya',
+          avatar: 'ghost',
+        ),
+        // '/': (context) => SigninScreen(),
         '/home': (context) => AppScreen(),
         '/signup': (context) => SignupScreen(),
-        '/add_group': (context) => AddGroup(),
+        // '/add_group': (context) => AddGroup(),
       },
     );
   }

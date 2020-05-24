@@ -127,27 +127,31 @@ class _SigninScreenState extends State<SigninScreen> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            FlatButton(
-                              onPressed: _isProcessing ? null : () {},
-                              textColor: Theme.of(context).primaryColor,
-                              child: Text(
-                                'Forgot Password?',
+                        child: SizedBox(
+                          height: 50,
+                          width: double.maxFinite,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              FlatButton(
+                                onPressed: _isProcessing ? null : () {},
+                                textColor: Theme.of(context).primaryColor,
+                                child: Text(
+                                  'Forgot Password?',
+                                ),
                               ),
-                            ),
-                            FlatButton(
-                              onPressed: _isProcessing
-                                  ? null
-                                  : () => Navigator.of(context)
-                                      .pushNamed('/signup'),
-                              textColor: Theme.of(context).primaryColor,
-                              child: Text(
-                                'Create Account?',
+                              FlatButton(
+                                onPressed: _isProcessing
+                                    ? null
+                                    : () => Navigator.of(context)
+                                        .pushNamed('/signup'),
+                                textColor: Theme.of(context).primaryColor,
+                                child: Text(
+                                  'Create Account?',
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       _isProcessing

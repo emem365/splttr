@@ -18,21 +18,6 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
-  String _createBodyForTile(List<String> friendsList) {
-    switch (friendsList.length) {
-      case 0:
-        return '';
-      case 1:
-        return 'with ${friendsList[0]}';
-      case 2:
-        return 'with ${friendsList[0]} and ${friendsList[1]}';
-      case 3:
-        return 'with ${friendsList[0]}, ${friendsList[1]} and ${friendsList[2]}';
-      default:
-        return 'with ${friendsList[0]}, ${friendsList[1]} and ${friendsList.length - 2} others';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -122,7 +107,7 @@ class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
               tag: _splitsList[index]['tag'],
               avatar: _splitsList[index]['avatar'],
               title: _splitsList[index]['outing-name'],
-              body: _createBodyForTile(_splitsList[index]['friends']),
+              body: LargeAvatarTile.createBodyFromList(_splitsList[index]['friends']),
               subtitle: _dateformat.format(_splitsList[index]['date']),
               onTap: () {
                 Navigator.push(
