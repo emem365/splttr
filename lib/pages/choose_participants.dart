@@ -4,6 +4,8 @@ import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/dummy_data.dart';
 
 class ChooseParticipants extends StatefulWidget {
+  final bool enableSelectionByGroup;
+  ChooseParticipants({this.enableSelectionByGroup});
   @override
   _ChooseParticipantsState createState() => _ChooseParticipantsState();
 }
@@ -20,6 +22,19 @@ class _ChooseParticipantsState extends State<ChooseParticipants> {
 
   @override
   Widget build(BuildContext context) {
+    FloatingActionButton _floatingActionButton =
+        (widget.enableSelectionByGroup == true)
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChooseParticipantsByGroup()),
+                  );
+                },
+                label: Text('Select By Group'),
+              )
+            : null;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -36,16 +51,7 @@ class _ChooseParticipantsState extends State<ChooseParticipants> {
         ],
         elevation: 0,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ChooseParticipantsByGroup()),
-          );
-        },
-        label: Text('Select By Group'),
-      ),
+      floatingActionButton: _floatingActionButton,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverToBoxAdapter(
