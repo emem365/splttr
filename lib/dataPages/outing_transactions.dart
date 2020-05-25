@@ -5,7 +5,7 @@ class Outing {
   String mode;
   int amount;
 
-  Outing(this.outingName,this.mode, this.userName, this.amount, this.paidFor);
+  Outing({this.outingName,this.mode, this.userName, this.amount, this.paidFor});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{

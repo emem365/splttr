@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:splttr/pages/appscreen.dart';
 import 'package:splttr/res/slide_transition.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:splttr/database/datahelper.dart';
+import 'package:splttr/database/userQuery.dart';
 
 class SigninScreen extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   void initState() {
     super.initState();
-    dbHelper = DBHelper();
+    dbHelper = UserQuery();
     _isProcessing = false;
   }
 

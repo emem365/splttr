@@ -6,6 +6,7 @@ class User {
   String email;
   String password;
   DateTime dob;
+  String avtar;
 
   User({
   this.firstName,
@@ -13,7 +14,8 @@ class User {
   this.dob,
   this.email,
   this.password,
-  this.username
+  this.username,
+  this.avtar
   });
 
   Map<String, dynamic> toMap() {
@@ -23,7 +25,8 @@ class User {
       'username': username,
       'email': email,
       'password': password,
-      'dob': dob.toString()
+      'dob': dob.toString(),
+      'avtar':avtar
     };
     return map;
   }
@@ -35,6 +38,7 @@ class User {
     email = map['email'];
     password = map['password'];
     dob = _dateformat.parse(map['dob']);
+    avtar= map['avtar'];
   }
   User.fromMapName(Map<String, dynamic> map) {
     // firstName = map['firstName'];

@@ -2,7 +2,7 @@ class GroupOuting {
   String groupName;
   String outingName;
 
-  GroupOuting(this.groupName,this.outingName);
+  GroupOuting({this.groupName,this.outingName});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{

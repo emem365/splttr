@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-import 'package:splttr/database/user.dart';
-import 'package:splttr/database/datahelper.dart';
+import 'package:splttr/dataPages/user.dart';
+import 'package:splttr/database/userQuery.dart';
 import 'package:splttr/pages/pick_avatar_screen.dart';
+import 'package:splttr/widgets/pick_avatar.dart';
 
 class RegisterUser extends StatefulWidget {
   final String firstName;
@@ -46,7 +47,7 @@ class _RegisterUserState extends State<RegisterUser> {
   @override
   void initState() {
     super.initState();
-    dbHelper = DBHelper();
+    dbHelper = UserQuery();
     _usernameController = new TextEditingController();
     _passwordController = new TextEditingController();
     _repasswordController = new TextEditingController();
@@ -80,6 +81,7 @@ class _RegisterUserState extends State<RegisterUser> {
         dob: widget.dob,
         username: _usernameController.text,
         password: _passwordController.text,
+        avtar: _avatar,
       );
 
       registerUser(newuser)

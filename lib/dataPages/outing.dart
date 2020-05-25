@@ -3,7 +3,7 @@ class Outing {
   String date;
   String place;
 
-  Outing(this.outingName,this.date, this.place);
+  Outing({this.outingName,this.date, this.place});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{

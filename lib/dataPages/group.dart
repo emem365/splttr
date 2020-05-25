@@ -2,7 +2,7 @@ class Group {
   String groupName;
   String doc;
 
-  Group(this.groupName,this.doc);
+  Group({this.groupName,this.doc});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
