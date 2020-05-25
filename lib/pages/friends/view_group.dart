@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:splttr/pages/pick_avatar_screen.dart';
 import 'package:splttr/res/avatars.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
-import 'package:splttr/widgets/pick_avatar.dart';
 
 class ViewGroup extends StatelessWidget {
   final List _membersList = DummyData.friends.sublist(0, 5);

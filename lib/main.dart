@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             Theme.of(context).textTheme.apply(fontFamily: 'Merriweather'),
       ),
       // home: AddSplit(),
-      initialRoute: '/groups',
+      initialRoute: '/',
       routes: {
         '/': (context) => SigninScreen(),
         '/home': (context) => AppScreen(),

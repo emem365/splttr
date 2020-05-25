@@ -3,9 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/currency.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/widgets/app_screen_title_with_image_widget.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:intl/intl.dart';
 import 'package:splttr/widgets/small_avatar_tile.dart';
+import 'package:splttr/widgets/two_button_row.dart';
 
 class Expenses extends StatefulWidget {
   @override
@@ -55,81 +57,23 @@ class _ExpensesState extends State<Expenses>
       itemCount: divisions.length + 1,
       itemBuilder: (context, index) {
         if (index == 0)
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(32),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.width / 3,
-                    child: Image.asset(
-                      'assets/images/split.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Expenses',
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                        fontFamily: 'Montserrat',
-                      ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: RaisedButton(
-                          padding: EdgeInsets.all(16.0),
-                          shape: StadiumBorder(),
-                          color: PurpleTheme.lightPurple,
-                          onPressed: () {},
-                          child: Text(
-                            'Add split',
-                            style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: RaisedButton(
-                          padding: EdgeInsets.all(16.0),
-                          shape: StadiumBorder(),
-                          color: PurpleTheme.lightPurple,
-                          onPressed: () {},
-                          child: Text(
-                            'Add expense',
-                            style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                (_expensesList.length == 0)
-                    ? EmptyListEmoticonMessage(
-                        emotion: Emotion.happy,
-                        message:
-                            'You have not added any expenses yet. You can start by pressing the \"Add Expenses\" button :)',
-                      )
-                    : null,
-              ].where((widget) => widget != null).toList(),
+          return AppScreenTitleWithImageWidget(
+            imagePath: 'assets/images/split.png',
+            title: 'Expenses',
+            buttonRow: TwoButtonRow(
+              buttonOneOnPressed: () {},
+              buttonOneText: 'Add Split',
+              buttonTwoOnPressed: () {},
+              buttonTwoText: 'Add expense',
+            ),
+            showEmptyListMessage: (_expensesList.length == 0),
+            message: EmptyListEmoticonMessage(
+              emotion: Emotion.happy,
+              message:
+                  'You have not added any expenses yet. You can start by pressing the \"Add Expenses\" button :)',
             ),
           );
+
         index--;
         return Column(
           mainAxisSize: MainAxisSize.min,

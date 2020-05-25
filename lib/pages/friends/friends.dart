@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/widgets/app_screen_title_with_image_widget.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:splttr/widgets/small_avatar_tile.dart';
+import 'package:splttr/widgets/two_button_row.dart';
 
 class Friends extends StatefulWidget {
   @override
@@ -28,79 +29,20 @@ class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin {
       itemCount: _friendsList.length + 1,
       itemBuilder: (context, index) {
         if (index == 0)
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(32),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 3,
-                    height: MediaQuery.of(context).size.width / 3,
-                    child: Image.asset(
-                      'assets/images/friends.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Friends',
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                        fontFamily: 'Montserrat',
-                      ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16),
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: RaisedButton(
-                          padding: EdgeInsets.all(16.0),
-                          shape: StadiumBorder(),
-                          color: PurpleTheme.lightPurple,
-                          onPressed: () {},
-                          child: Text(
-                            'Manage groups',
-                            style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: RaisedButton(
-                          padding: EdgeInsets.all(16.0),
-                          shape: StadiumBorder(),
-                          color: PurpleTheme.lightPurple,
-                          onPressed: () {},
-                          child: Text(
-                            'Add friend',
-                            style: TextStyle(
-                              letterSpacing: 1.0,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                (_friendsList.length == 0)
-                    ? EmptyListEmoticonMessage(
-                        emotion: Emotion.sad,
-                        message:
-                            'You haven\'t added any friends yet :(\nYou can share expenses with friends or a group of friends. Add someone you know to get started.',
-                      )
-                    : null,
-              ].where((widget) => widget != null).toList(),
+          return AppScreenTitleWithImageWidget(
+            imagePath: 'assets/images/friends.png',
+            title: 'Friends',
+            buttonRow: TwoButtonRow(
+              buttonOneOnPressed: () {},
+              buttonOneText: 'Manage groups',
+              buttonTwoOnPressed: () {},
+              buttonTwoText: 'Add friend',
+            ),
+            showEmptyListMessage: (_friendsList.length == 0),
+            message: EmptyListEmoticonMessage(
+              emotion: Emotion.sad,
+              message:
+                  'You haven\'t added any friends yet :(\nYou can share expenses with friends or a group of friends. Add someone you know to get started.',
             ),
           );
         index--;
