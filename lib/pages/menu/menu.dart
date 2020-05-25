@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:splttr/res/colors.dart';
+import 'package:splttr/dataPages/user.dart';
+import 'package:splttr/res/avatars.dart';
 
 class Menu extends StatelessWidget {
+  final User signinedUser;
+  Menu(this.signinedUser);
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -20,11 +24,8 @@ class Menu extends StatelessWidget {
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: PurpleTheme.pinkishPurple,
-                  minRadius: MediaQuery.of(context).size.width / 8,
-                  child: Icon(
-                    Icons.person,
-                    size: MediaQuery.of(context).size.width / 6,
-                  ),
+                  radius: MediaQuery.of(context).size.width / 8,
+                  child:  Avatars.getAssetFromName(signinedUser.avtar),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -32,7 +33,7 @@ class Menu extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'Your Name',
+                        signinedUser.firstName+" "+signinedUser.lastName,
                         style: Theme.of(context).textTheme.headline5.copyWith(
                               letterSpacing: 2,
                               color: Colors.white,
@@ -41,7 +42,7 @@ class Menu extends StatelessWidget {
                             ),
                       ),
                       Text(
-                        '@username',
+                        signinedUser.username,
                         style: Theme.of(context).textTheme.subtitle2.apply(
                               color: Colors.black,
                             ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/pages/login/signin.dart';
 import 'package:splttr/pages/login/signup.dart';
-import 'package:splttr/pages/appscreen.dart';
 
 
 void main() => runApp(MyApp());
@@ -24,7 +23,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SigninScreen(),
-        '/home': (context) => AppScreen(),
         '/signup': (context) => SignupScreen(),
       },
     );

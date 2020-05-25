@@ -41,12 +41,7 @@ class User {
     avtar= map['avtar'];
   }
   User.fromMapName(Map<String, dynamic> map) {
-    // firstName = map['firstName'];
-    // lastName = map['lastName'];
     username = map['username'];
-    // email = map['email'];
-    // password = map['password'];
-    // dob = _dateformat.parse(map['dob']);
   }
   
 

@@ -6,10 +6,13 @@ import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:intl/intl.dart';
 import 'package:splttr/widgets/small_avatar_tile.dart';
+import 'package:splttr/dataPages/user.dart';
 
 class Expenses extends StatefulWidget {
+  final User signinedUser;
+  Expenses(this.signinedUser);
   @override
-  _ExpensesState createState() => _ExpensesState();
+  _ExpensesState createState() => _ExpensesState(signinedUser);
 }
 
 class _ExpensesState extends State<Expenses>
@@ -17,6 +20,8 @@ class _ExpensesState extends State<Expenses>
   List _expensesList = DummyData.expensesList;
   final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
   List divisions = List();
+  final User signinedUser;
+  _ExpensesState(this.signinedUser);
   void seperateDivisions() {
     DateTime currentDate;
     int count = -1;

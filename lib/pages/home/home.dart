@@ -4,15 +4,20 @@ import 'package:splttr/pages/home/owes_dues_list.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/res/colors.dart';
+import 'package:splttr/dataPages/user.dart';
 
 class Home extends StatefulWidget {
+  final User signinedUser;
+  Home(this.signinedUser);
   @override
-  _HomeState createState() => _HomeState();
+  _HomeState createState() => _HomeState(signinedUser);
 }
 
 class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   final _usersOweYouList = DummyData.usersOweYouList;
   final _youOweUsersList = DummyData.youOweUsersList;
+  final User signinedUser;
+  _HomeState(this.signinedUser);
 
   List<Widget> _buildListViewItems() {
     List<Widget> items = [

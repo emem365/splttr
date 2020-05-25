@@ -5,14 +5,19 @@ import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:intl/intl.dart';
 import 'package:splttr/pages/splits/split_description.dart';
 import 'package:splttr/widgets/large_avatar_tile.dart';
+import 'package:splttr/dataPages/user.dart';
 
 class Splits extends StatefulWidget {
+  final User signinedUser;
+  Splits(this.signinedUser);
   @override
-  _SplitsState createState() => _SplitsState();
+  _SplitsState createState() => _SplitsState(signinedUser);
 }
 
 class _SplitsState extends State<Splits> with AutomaticKeepAliveClientMixin {
   final DateFormat _dateformat = DateFormat('dd/MM/yyyy');
+  final User signinedUser;
+  _SplitsState(this.signinedUser);
   List _splitsList = DummyData.splitsList;
 
   @override

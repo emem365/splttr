@@ -16,6 +16,7 @@ class _SigninScreenState extends State<SigninScreen> {
   final _passwordController = TextEditingController();
   var _isProcessing;
   var dbHelper;
+  var userDetails;
   bool validDetails = true;
 
   @override
@@ -40,7 +41,8 @@ class _SigninScreenState extends State<SigninScreen> {
         setState(() {
       _isProcessing = true;
     });
-        Navigator.of(context).pushReplacement(SlideRoute(widget: AppScreen()));
+    userDetails = await dbHelper.userDetails(username);
+        Navigator.of(context).pushReplacement(SlideRoute(widget: AppScreen(userDetails)));
       }
       else{
         setState(() {

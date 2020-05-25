@@ -4,14 +4,19 @@ import 'package:splttr/res/colors.dart';
 import 'package:splttr/res/dummy_data.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:splttr/widgets/small_avatar_tile.dart';
+import 'package:splttr/dataPages/user.dart';
 
 class Friends extends StatefulWidget {
+  final User signinedUser;
+  Friends(this.signinedUser);
   @override
-  _FriendsState createState() => _FriendsState();
+  _FriendsState createState() => _FriendsState(signinedUser);
 }
 
 class _FriendsState extends State<Friends> with AutomaticKeepAliveClientMixin {
   List _friendsList = DummyData.friends;
+  final User signinedUser;
+  _FriendsState(this.signinedUser);
 
   @override
   void initState() {

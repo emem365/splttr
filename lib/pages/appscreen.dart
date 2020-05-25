@@ -6,8 +6,13 @@ import 'package:splttr/pages/home/home.dart';
 import 'package:splttr/pages/splits/splits.dart';
 import 'package:splttr/pages/expenses/expenses.dart';
 import 'package:splttr/pages/menu/menu.dart';
+import 'package:splttr/dataPages/user.dart';
+
+
 
 class AppScreen extends StatelessWidget {
+  final User signinedUser;
+  AppScreen(this.signinedUser);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -60,11 +65,11 @@ class AppScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            Home(),
-            Splits(),
-            Expenses(),
-            Friends(),
-            Menu(),
+            Home(signinedUser),
+            Splits(signinedUser),
+            Expenses(signinedUser),
+            Friends(signinedUser),
+            Menu(signinedUser),
           ],
         ),
       ),

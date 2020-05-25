@@ -41,16 +41,17 @@ import 'datahelper.dart';
   }
   Future<String> checkPass(String userName) async {
     var dbClient = await data.db;
-    // await dbClient.transaction((txn) async {
-    //   var query = "INSERT INTO $TABLE ($NAME) VALUES ('" + user.name + "')";
-    //   return await txn.rawInsert(query);
-
   List<Map> result = await dbClient.rawQuery('SELECT * FROM Users WHERE userName=?', [userName]);
-
-    // print the results
     var a;
     result.forEach((row) => a = User.fromMap(row).password);
     return a;
-
   }
+  Future<User> userDetails(String userName) async {
+    var dbClient = await data.db;
+  List<Map> result = await dbClient.rawQuery('SELECT * FROM Users WHERE userName=?', [userName]);
+    var a;
+    result.forEach((row) => a = User.fromMap(row));
+    return a;
+  }
+  
 }
