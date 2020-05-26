@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:splttr/pages/login/register_user.dart';
+import 'package:splttr/res/text_field_decoration.dart';
+import 'package:splttr/res/validators.dart';
+import 'package:splttr/widgets/flat_submit_button.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -58,194 +61,91 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const SizedBox _sizedBoxSpace = SizedBox(height: 20);
     return Scaffold(
       body: Material(
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            // mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 48, bottom: 16),
-                child: Image(
-                  image: AssetImage('assets/images/banner.png'),
-                  width: MediaQuery.of(context).size.width / 3,
-                  height: MediaQuery.of(context).size.width / 3,
-                ),
-              ),
-              Text(
-                'Sign-up',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: TextFormField(
-                          controller: _firstNameController,
-                          validator: (value) {
-                            final _allowedLetters =
-                                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                            if (value.isEmpty) {
-                              return 'Please enter a Name';
-                            }
-                            if (value.length > 32) {
-                              return 'Enter a valid Name';
-                            }
-                            var lis = value.split('');
-                            for (String char in lis) {
-                              if (!(_allowedLetters.contains(char))) {
-                                return 'Illegal letters present';
-                              }
-                            }
-                            return null;
-                          },
-                          cursorColor: Theme.of(context).primaryColor,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            labelText: 'First Name',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(40),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: TextFormField(
-                          controller: _lastNameController,
-                          validator: (value) {
-                            final _allowedLetters =
-                                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                            if (value.length > 32) {
-                              return 'Enter a valid Name';
-                            }
-                            var lis = value.split('');
-                            for (String char in lis) {
-                              if (!(_allowedLetters.contains(char))) {
-                                return 'Illegal letters present';
-                              }
-                            }
-                            return null;
-                          },
-                          cursorColor: Theme.of(context).primaryColor,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            labelText: 'Last Name',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(40),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: TextFormField(
-                          controller: _emailController,
-                          validator: (value) {
-                            final _allowedLetters =
-                                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.";
-                            final _specialCharacters = "!#\$%&'*+-/=?^_`{|}~";
-                            if (value.isEmpty) {
-                              return 'Please enter a Date';
-                            }
-                            if (value.length > 32) {
-                              return 'Enter a valid email';
-                            }
-                            var parts = value.split('@');
-                            if (parts.length != 2) return 'Invalid email';
-                            var localList = parts[0].split('');
-                            var domainList = parts[1].split('');
-                            for (String char in localList) {
-                              if (!(_allowedLetters.contains(char) ||
-                                  _specialCharacters.contains(char))) {
-                                return 'Illegal letters present';
-                              }
-                            }
-                            for (String char in domainList) {
-                              if (!(_allowedLetters.contains(char))) {
-                                return 'Illegal letters present';
-                              }
-                            }
-                            return null;
-                          },
-                          cursorColor: Theme.of(context).primaryColor,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            labelText: 'Email Name',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(40),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: TextFormField(
-                          readOnly: true,
-                          onTap: () {
-                            _datePicker(context);
-                          },
-                          controller: _dateController,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter a Date';
-                            }
-                            return null;
-                          },
-                          cursorColor: Theme.of(context).primaryColor,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            labelText: 'Date of Birth',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(40),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(16),
-                      ),
-                      FlatButton(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 75),
-                        onPressed: () {
-                          if (_formKey.currentState.validate())
-                            _processUserData(context);
-                        },
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        color: Theme.of(context).primaryColor,
-                        shape: StadiumBorder(),
-                      ),
-                    ],
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 48, bottom: 16),
+                    child: Image(
+                      image: AssetImage('assets/images/banner.png'),
+                      width: MediaQuery.of(context).size.width / 3,
+                      height: MediaQuery.of(context).size.width / 3,
+                    ),
                   ),
-                ),
+                  Text(
+                    'Sign-up',
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  _sizedBoxSpace,
+                  _sizedBoxSpace,
+                  _sizedBoxSpace,
+                  TextFormField(
+                    controller: _firstNameController,
+                    validator: Validators.validateFirstName,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: TextFieldDecoration.circularBorderDecoration(
+                      icon: Icon(Icons.person),
+                      labelText: 'First Name',
+                      hintText: 'What do people call you?',
+                    ),
+                  ),
+                  _sizedBoxSpace,
+                  TextFormField(
+                    controller: _lastNameController,
+                    validator: Validators.validateLastName,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: TextFieldDecoration.circularBorderDecoration(
+                      icon: Icon(Icons.person),
+                      labelText: 'Last Name',
+                      hintText: 'Family Name',
+                    ),
+                  ),
+                  _sizedBoxSpace,
+                  TextFormField(
+                    controller: _emailController,
+                    validator: Validators.validateEmail,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: TextFieldDecoration.circularBorderDecoration(
+                      icon: Icon(Icons.mail),
+                      labelText: 'Email',
+                      hintText: 'Where can we reach you?',
+                    ),
+                  ),
+                  _sizedBoxSpace,
+                  TextFormField(
+                    readOnly: true,
+                    onTap: () {
+                      _datePicker(context);
+                    },
+                    controller: _dateController,
+                    validator: Validators.validateDate,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: TextFieldDecoration.circularBorderDecoration(
+                      icon: Icon(Icons.calendar_today),
+                      labelText: 'Date of Birth',
+                    ),
+                  ),
+                  _sizedBoxSpace,
+                  FlatSubmitButton(
+                    onPressed: () {
+                      if (_formKey.currentState.validate())
+                        _processUserData(context);
+                    },
+                    labelText: 'Next',
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

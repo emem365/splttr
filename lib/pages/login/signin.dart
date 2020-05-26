@@ -3,6 +3,9 @@ import 'package:splttr/pages/appscreen.dart';
 import 'package:splttr/res/slide_transition.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:splttr/database/userQuery.dart';
+import 'package:splttr/res/text_field_decoration.dart';
+import 'package:splttr/res/validators.dart';
+import 'package:splttr/widgets/flat_submit_button.dart';
 
 class SigninScreen extends StatefulWidget {
   @override
@@ -66,147 +69,100 @@ class _SigninScreenState extends State<SigninScreen> {
       body: Material(
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(
-                image: AssetImage('assets/images/banner.png'),
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      TextFormField(
-                        enabled: !_isProcessing,
-                        controller: _usernameController,
-                        validator: (value) {
-                          final _allowedLetters =
-                              "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!.-_";
-                          if (value.isEmpty) {
-                            return 'Please enter a username';
-                          }
-                          if (value.length > 32) {
-                            return 'Enter a valid username';
-                          }
-                          if (value[0].toUpperCase() == value[0]) {
-                            return 'Username cannot start with Uppercase Character';
-                          }
-                          if (value[0] == '!' ||
-                              value[0] == '.' ||
-                              value[0] == '-' ||
-                              value[0] == '_') {
-                            return 'Username cannot start with ${value[0]}';
-                          }
-                          var lis = value.split('');
-                          for (String char in lis) {
-                            if (!(_allowedLetters.contains(char))) {
-                              return 'Illegal letters present';
-                            }
-                          }
-                          return null;
-                        },
-                        cursorColor: Theme.of(context).primaryColor,
-                        decoration: InputDecoration(
-                          alignLabelWithHint: true,
-                          labelText: 'Username',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(40),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 24.0, bottom: 8),
-                        child: TextFormField(
-                          enabled: !_isProcessing,
-                          controller: _passwordController,
-                          validator: (value) {
-                          if(!validDetails){
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('assets/images/banner.png'),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width,
+                  ),
+                  SizedBox(height: 40),
+                  TextFormField(
+                    enabled: !_isProcessing,
+                    controller: _usernameController,
+                    validator: Validators.validateUserName,
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: TextFieldDecoration.circularBorderDecoration(
+                      icon: Icon(Icons.person),
+                      labelText: 'Username',
+                      hintText: 'What should we call you?',
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    enabled: !_isProcessing,
+                    controller: _passwordController,
+                    cursorColor: Theme.of(context).primaryColor,
+                    obscureText: true,
+                    validator: (value){
+                        if(Validators.validatePassword(value)!=null){
+                            return Validators.validatePassword(value)
+                        }
+                        else  if(!validDetails){
                             validDetails = true;
                             return 'Invalid UserName or Password';
                           }
                           return null;
-                        },
-                          cursorColor: Theme.of(context).primaryColor,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            alignLabelWithHint: true,
-                            labelText: 'Password',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(40),
-                              borderSide: BorderSide(
-                                style: BorderStyle.solid,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8),
-                        child: SizedBox(
-                          height: 50,
-                          width: double.maxFinite,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              FlatButton(
-                                onPressed: _isProcessing ? null : () {},
-                                textColor: Theme.of(context).primaryColor,
-                                child: Text(
-                                  'Forgot Password?',
-                                ),
-                              ),
-                              FlatButton(
-                                onPressed: _isProcessing
-                                    ? null
-                                    : () => Navigator.of(context)
-                                        .pushNamed('/signup'),
-                                textColor: Theme.of(context).primaryColor,
-                                child: Text(
-                                  'Create Account?',
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      _isProcessing
-                          ? JumpingDotsProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                              dotSpacing: 1.0,
-                              fontSize: 48,
-                            )
-                          : FlatButton(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 75),
-                              onPressed: () {
-                                if (_formKey.currentState.validate()) {
-                                  _processUserData(_usernameController.text,
-                                      _passwordController.text);
-                                }
-                              },
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              color: Theme.of(context).primaryColor,
-                              shape: StadiumBorder(),
-                            ),
-                    ],
+                        
+                    }
+                    
+                    // validator: ,
+                    decoration: TextFieldDecoration.circularBorderDecoration(
+                      icon: Icon(Icons.lock),
+                      labelText: 'Password',
+                      hintText: 'Try to choose a strong password',
+                    ),
                   ),
-                ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: _isProcessing ? null : () {},
+                          textColor: Theme.of(context).primaryColor,
+                          child: Text(
+                            'Forgot Password?',
+                          ),
+                        ),
+                        FlatButton(
+                          onPressed: _isProcessing
+                              ? null
+                              : () =>
+                                  Navigator.of(context).pushNamed('/signup'),
+                          textColor: Theme.of(context).primaryColor,
+                          child: Text(
+                            'Create Account?',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  _isProcessing
+                      ? JumpingDotsProgressIndicator(
+                          color: Theme.of(context).primaryColor,
+                          dotSpacing: 1.0,
+                          fontSize: 48,
+                        )
+                      : FlatSubmitButton(
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              _processUserData(_usernameController.text,
+                                  _passwordController.text);
+                            }
+                          },
+                          labelText: 'Submit',
+                        ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

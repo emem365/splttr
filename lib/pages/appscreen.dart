@@ -20,9 +20,8 @@ class AppScreen extends StatelessWidget {
       child: Scaffold(
         appBar: ShiftingTabBar(
           labelStyle: Theme.of(context).textTheme.headline5.copyWith(
-                fontSize: 14,
+                fontSize: 12,
                 color: Colors.white,
-                // letterSpacing: 2,
                 fontWeight: FontWeight.w600,
               ),
           tabs: <ShiftingTab>[

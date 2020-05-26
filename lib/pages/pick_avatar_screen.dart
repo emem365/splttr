@@ -71,6 +71,7 @@ class _PickAvatarScreenState extends State<PickAvatarScreen> {
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),
+        centerTitle: true,
         title: Text('Select Avatar'),
         actions: <Widget>[
           FlatButton.icon(

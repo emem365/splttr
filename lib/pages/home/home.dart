@@ -3,6 +3,7 @@ import 'package:splttr/pages/home/owes_dues_chart.dart';
 import 'package:splttr/pages/home/owes_dues_list.dart';
 import 'package:splttr/widgets/empty_list_message.dart';
 import 'package:splttr/res/dummy_data.dart';
+import 'package:splttr/widgets/two_button_row.dart';
 import 'package:splttr/res/colors.dart';
 import 'package:splttr/dataPages/user.dart';
 
@@ -29,45 +30,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           child: OwesDuesChart(),
         ),
       ),
-      Row(
-        children: <Widget>[
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: RaisedButton(
-                padding: EdgeInsets.all(16.0),
-                shape: StadiumBorder(),
-                color: PurpleTheme.lightPurple,
-                onPressed: () {},
-                child: Text(
-                  'Add a friend',
-                  style: TextStyle(
-                    letterSpacing: 1.0,
-                    fontSize: 14.0,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: RaisedButton(
-                padding: EdgeInsets.all(16.0),
-                shape: StadiumBorder(),
-                color: PurpleTheme.lightPurple,
-                onPressed: (){},
-                child: Text(
-                  'Split an expense',
-                  style: TextStyle(
-                    letterSpacing: 1.0,
-                    fontSize: 14.0,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+      TwoButtonRow(
+        buttonOneText: 'Add a friend',
+        buttonOneOnPressed: (){},
+        buttonTwoText: 'Split an Expense',
+        buttonTwoOnPressed: (){},
       ),
     ];
     if ((_youOweUsersList.length == 0) && (_usersOweYouList.length == 0)) {

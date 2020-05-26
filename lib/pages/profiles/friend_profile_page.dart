@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:splttr/pages/profiles/profile_expenses_tab.dart';
 import 'package:splttr/pages/profiles/profile_friends.dart';
 import 'package:splttr/pages/profiles/profile_groups_tab.dart';
-import 'package:splttr/pages/profiles/profile_owes_dues_tab.dart';
 import 'package:splttr/res/avatars.dart';
+import 'package:splttr/res/colors.dart';
 import 'package:splttr/widgets/tab_bar_with_background.dart';
 
 
-class ProfilePage extends StatelessWidget {
+class FriendProfilePage extends StatefulWidget {
   final String tag;
   final String name;
   final String avatar;
-  ProfilePage({this.tag, this.name, this.avatar});
-  
+  FriendProfilePage({this.tag, this.name, this.avatar});
+  @override
+  _FriendProfilePageState createState() => _FriendProfilePageState();
+}
+
+class _FriendProfilePageState extends State<FriendProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -34,8 +39,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                     IconButton(
                       icon: Icon(
-                        FontAwesomeIcons.edit,
-                        color: Colors.black,
+                        FontAwesomeIcons.userCheck,
+                        color: CurrencyColors.profitColor,
                       ),
                       onPressed: () {},
                     ),
@@ -65,16 +70,16 @@ class ProfilePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Hero(
-                              tag: tag,
+                              tag: widget.tag,
                               child: CircleAvatar(
-                                child: Avatars.getAssetFromName(avatar),
+                                child: Avatars.getAssetFromName(widget.avatar),
                                 radius: MediaQuery.of(context).size.width / 6,
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text(
-                                ' $name ',
+                                ' ${widget.name} ',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline5
@@ -111,7 +116,7 @@ class ProfilePage extends StatelessWidget {
                           ),
                       tabs: [
                         Tab(
-                          text: 'Owes/Dues',
+                          text: 'Expenses',
                         ),
                         Tab(
                           text: 'Groups',
@@ -128,7 +133,7 @@ class ProfilePage extends StatelessWidget {
             },
             body: TabBarView(
               children: <Widget>[
-                ProfileOwesDues(),
+                ProfileExpenses(),
                 ProfileGroups(),
                 ProfileFriends(),
               ],
