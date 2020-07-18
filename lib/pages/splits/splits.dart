@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:splttr/pages/splits/split_description.dart';
 import 'package:splttr/widgets/large_avatar_tile.dart';
 import 'package:splttr/widgets/two_button_row.dart';
+import 'package:splttr/dataPages/user.dart';
 
 class Splits extends StatefulWidget {
   @override

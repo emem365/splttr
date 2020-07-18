@@ -82,7 +82,18 @@ class _SigninScreenState extends State<SigninScreen> {
                     controller: _passwordController,
                     cursorColor: Theme.of(context).primaryColor,
                     obscureText: true,
-                    validator: Validators.validatePassword,
+                    validator: (value){
+                        if(Validators.validatePassword(value)!=null){
+                            return Validators.validatePassword(value)
+                        }
+                        else  if(!validDetails){
+                            validDetails = true;
+                            return 'Invalid UserName or Password';
+                          }
+                          return null;
+                        
+                    }
+                    
                     // validator: ,
                     decoration: TextFieldDecoration.circularBorderDecoration(
                       icon: Icon(Icons.lock),

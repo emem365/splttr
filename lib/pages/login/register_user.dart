@@ -75,6 +75,15 @@ class _RegisterUserState extends State<RegisterUser> {
     return false;
   }
 
+  Future<bool> checkUsernameExists(String value) async {
+    var userNames = await getUserNames();
+    if (!userNames.contains(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     const _sizedBoxSpace = SizedBox(height: 16);
